@@ -30,8 +30,8 @@
                                 <td><?= $no; ?></td>
                                 <td><?= $kt['nama_kategori']; ?></td>
                                 <td>
-                                    <a class="badge badge-success" href="">edit</a>
-                                    <a class="badge badge-danger" href="">delete</a>
+                                    <a class="badge badge-success" href="<?= base_url('admin/edit_kategori/') . $kt['id_kategori']; ?>">edit</a>
+                                    <a type="button" class="badge badge-danger" data-toggle="modal" data-target="#hapusModal" onclick="confirm_modal('<?= base_url('admin/delete_kategori/') . $kt['id_kategori']; ?>')" href="#">delete</a>
                                 </td>
                             </tr>
                             <?php $no++; ?>
@@ -71,6 +71,32 @@
                     <button type="submit" class="btn btn-primary" href="#">Tambah</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Logout Modal Hapus-->
+<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hapusModalLabel">Tambah Data</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <?php foreach ($kategori as $kt) : ?>
+                <form action="<?= base_url('admin/delete_kategori/') . $kt['id_kategori']; ?>" method="POST">
+                <?php endforeach; ?>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus data tersebut? Pilih "Hapus" untuk menghapus, pilih "Batal" untuk kembali ke panel ini.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" href="#">Hapus</button>
+                </div>
+                </form>
         </div>
     </div>
 </div>

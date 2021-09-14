@@ -43,3 +43,23 @@
   </body>
 
   </html>
+
+
+  <script>
+      window.setTimeout(function() {
+          $(".alert").fadeTo(500, 0).slideUp(500, function() {
+              $(this).remove();
+          });
+      }, 2000);
+  </script>
+
+  <script type="text/javascript">
+        function confirm_modal(delete_url) {
+            $('#hapusModal').modal('show', {
+                backdroup: 'static'
+            });
+            document.getElementById('delete_link').setAttribute('href', delete_url);
+        }
+  </script>
+
+  
