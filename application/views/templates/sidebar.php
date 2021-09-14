@@ -91,7 +91,7 @@
                     <span>Member</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?= base_url('user/admin/'); ?>">
                     <i class="fas fa-fw fa-user"></i>
                     <span>My Profile</span></a>
             </li>
