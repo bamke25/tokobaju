@@ -180,10 +180,25 @@ class Admin extends CI_Controller
 
     public function member()
     {
+        $data['member'] = $this->ModelAdmin->member();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Member';
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/member');
+        $this->load->view('admin/member/member', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function detail_member()
+    {
+        $data['member'] = $this->ModelAdmin->member();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Member';
+        $id = $this->uri->segment(3);
+        $data['detail'] = $this->ModelAdmin->edit_member('user', array('id' => $id))->row_array();
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/member/detail_member', $data);
+        $this->load->view('templates/footer');
     }
 }

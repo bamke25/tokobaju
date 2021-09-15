@@ -1,6 +1,16 @@
 <?php 
 class ModelAdmin extends CI_model
 {
+    public function member()
+    {
+        return $this->db->get('user')->result_array();
+    }
+
+    public function edit_member($table, $data)
+    {
+        return $this->db->get_where($table, $data);
+    }
+
     public function view_kategori()
     {
         return $this->db->get('kategori_produk')->result_array();
