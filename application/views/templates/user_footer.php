@@ -20,3 +20,6 @@
         </ul>
         <div class="copyright"><a href="">© 2021, Mascitra.Merch</a></div>
     </footer>
+    
+</body>
+</html>

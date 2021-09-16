@@ -24,6 +24,7 @@ footer, header, hgroup, menu, nav, section {
 /* html{overflow-y: scroll;scroll-behavior: smooth;} */
 body {
 	line-height: 1;
+    position: relative;
 }
 ol, ul {
 	list-style: none;
@@ -88,11 +89,87 @@ nav ul{
 }
 nav ul li{
     margin-left: 30px;
+    transition: -3s;
+    -webkit-transition: -3s;
+    -moz-transition: -3s;
+    -ms-transition: -3s;
+    -o-transition: -3s;
+}
+nav ul li:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 nav ul li a img{
     width: 29px;
 }
-
+.navbutton{
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: none;
+}
+.navbutton img{
+    width: 40px;
+    height: 40px;
+}
+.navbutton img:nth-child(2){
+    display: none;
+}
+#btnnav:checked ~ .navbutton img:nth-child(1){
+    display: none;
+}
+#btnnav:checked ~ .navbutton img:nth-child(2){
+    display: block;
+}
+#btnnav{
+    display: none;
+}
+@media screen and (max-width: 750px){
+    
+    nav h1{
+        position: absolute;
+        top: 0;
+    }
+    nav h1 a{
+        font-size: 20px;
+    }
+    nav ul{
+        display: inline-block;
+        position: relative;
+        margin: auto;
+        text-align: center;
+        background-color: #F5F6FA;
+        margin-top: 70px;
+        width: 100%;
+        height: 0%;
+        overflow: hidden;
+        transition: .3s;
+        -webkit-transition: .3s;
+        -moz-transition: .3s;
+        -ms-transition: .3s;
+        -o-transition: .3s;
+}
+    #btnnav:checked ~ ul{
+        height: 1000%;
+    }
+    nav ul li{
+        margin-left: 0px;
+        margin-bottom: 60px;
+    }
+    .navbutton{
+        display: block;
+    }
+}
+/* ======================================================================= */
 
 
 .jumbotron{
@@ -124,9 +201,10 @@ nav ul li a img{
     min-height: 100vh;
     box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-bottom: 30px;
+    box-sizing: border-box;
 }
 .katalog ul{
     position: relative;
@@ -136,7 +214,7 @@ nav ul li a img{
     text-align: center;
     text-transform: capitalize;
     box-sizing: border-box;
-    margin: 0px 30px 40px 30px;
+    margin: 0 30px 0 30px;
 }
 .katalog ul li{
     position: relative;
@@ -170,8 +248,8 @@ nav ul li a img{
 .shope{
     width: 100%;
     display: flex;
-    justify-content: center;
     margin-bottom: 130px;
+    margin-top: 100px;
 }
 .shopenow{
     position: relative;
@@ -188,6 +266,18 @@ nav ul li a img{
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    margin: auto;
+}
+.katalogtitle{
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+@media screen and (max-width: 750px){
+    .katalog ul{
+        margin: auto;
+    }
 }
 /* ======================================================================= */
 
@@ -240,13 +330,37 @@ footer .copyright a{
     color: white;
     text-decoration: none;
 }
+@media screen and (max-width: 750px){
+    footer{
+        overflow: hidden;
+    }
+    footer .info{
+        
+    margin: 0px 20px 0 20px;
+    }
+    footer .info li{
+        font-size: 12px;
+        color: white;
+        margin-bottom: 5px;
+    }
+    footer .info li:nth-child(1){
+        font-size: 15px;
+    }
+    footer .info:nth-child(3){
+        position: relative;
+        right: 30px;
+    }footer .info li img{
+        width: 100px;
+    }
+}
 /* ======================================================================= */
 
-#sideinfo{
+#sideinfo, #cart, #login, #register, #serach, #account{
     display: block;
     position: fixed;
+    top: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100vmin;
     background-color: rgba(0, 0, 0, 0.28);
     z-index: 9999;
     color: white;
@@ -255,18 +369,24 @@ footer .copyright a{
     -moz-transform: translateX(100%);
     -ms-transform: translateX(100%);
     -o-transform: translateX(100%);
+    overflow: auto;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
 }
-#sideinfo::before{
+#sideinfo::before, #cart::before, #login::before, #register::before, #serach::before, #account::before{
     content: '';
     display: block;
-    position: absolute;
-    right: 0;
+    position: relative;
+    float: right;
     width: 50%;
-    height: 100%;
+    min-height: 100vmin;
     background-color: rgba(255, 255, 255, 1);
     color: white;
 }
-#sideinfo:target{
+#sideinfo:target, #cart:target, #login:target, #register:target, #serach:target, #account:target{
     transform: translateX(0%);
     -webkit-transform: translateX(0%);
     -moz-transform: translateX(0%);
@@ -319,4 +439,238 @@ footer .copyright a{
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
+}
+.close:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+.contentinfo{
+    width: 50%;
+    position: absolute;
+    right: 0;
+    min-height: 100%;
+    color: black;
+    padding-top: 100px;
+    padding: 100px 10px 50px 10px;
+    box-sizing: border-box;
+    background-color: white;
+    box-sizing: border-box;
+}
+.contentinfo ul{
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    text-transform: capitalize;
+    box-sizing: border-box;
+}
+.contentinfo ul  li img, .shoppingcart img{
+    width: 200px;
+}
+.contentinfo ul  li h5{
+    width: 50%;
+    text-align: center;
+    font-weight: normal;
+    margin: auto;
+}
+
+.number, .size{
+    margin-top:20px;
+}
+.number span .size span{
+    text-transform: uppercase;
+}
+.number input, .size select{
+    height:20px;
+    width: 100px;
+    font-size: 15px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    display: inline-block;
+    vertical-align: middle;
+} 
+
+.btnsumbit{
+    width: 200px;
+    height: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 1);
+    border: solid 0px blueviolet;
+    color: white;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.shoppingcart{
+    display: block;
+    position: relative;
+    min-height: 100vmin;
+}
+.shoppingcart table{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.shoppingcart table tr th{
+    text-transform: uppercase;
+}
+.shoppingcart table tr td{
+    min-width: 50px;
+}
+.shoppingcart table tr td a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    font-size: 15px;
+}
+.shoppingcart table tr input{
+    width: 50px;
+}
+.shoppingcart table tr img{
+    width: 150px;
+}
+.shoppingcart table ~ h4 span{
+    margin-right: 10px;
+}
+.shoppingcart table ~ button, .shoppingcart table ~ .update, .shoppingcart table ~ label{
+    display: block;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    margin: auto;
+    right: 5px;
+    margin-top: 100px;
+}
+.shoppingcart table ~ label{
+    bottom: -100px;
+
+}
+.shoppingcart table ~ input{
+    display: none;
+}
+.shoppingcart table ~ label{
+    position: relative;
+    margin: auto;
+    text-align: center;
+    line-height: 30px;
+    text-transform: uppercase;
+    width: 250px;
+}
+.shoppingcart table ~ .update{
+    right: 150px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 30px;
+}
+.shoppingcart table ~ button:active, .shoppingcart table ~ .update:active{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+.boxform{
+    width: 100%;
+    height: 100%;
+    margin-top: 100px;
+}
+.boxform .form{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+.boxform .form label, .boxform .form input{
+    width: 100%;
+    box-sizing: border-box;
+}
+.boxform .form label{
+    text-transform: uppercase;
+    text-align: left;
+    cursor: pointer;
+}
+.boxform .form img{
+    width: 29px;
+}
+.boxform .form input{
+    border: none;
+    border-bottom: 1px solid black;
+    margin-top: 20px;
+}
+.boxform .form input:focus{
+    outline: 0;
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    transition: .3s;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -ms-transition: .3s;
+    -o-transition: .3s;
+}
+.boxform button, .boxform .register{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+}
+.boxform .register{
+    right: 0;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+.boxform button:active, .boxform .register:active{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+@media screen and (max-width: 750px){
+    #sideinfo::before, #cart::before{
+        content: '';
+        display: block;
+        position: relative;
+        float: right;
+        width: 100%;
+        min-height: 100vmin;
+        background-color: rgba(255, 255, 255, 1);
+        color: white;
+    }
+    #navinfo, .contentinfo{
+        width: 100%;
+    }
+    .shoppingcart{
+        min-height: 100vmax;
+    }
+    .shoppingcart table tr td{
+        font-size: 13px;
+    }
+    .shoppingcart table tr th{
+        font-size: 15px;
+    }
+    .shoppingcart table tr td a{
+        font-size: 12px;
+    }
 }
