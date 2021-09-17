@@ -171,7 +171,7 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="" class="contentinfo">
+        <form action="<?= base_url().'user/search_katalog'?>" class="contentinfo" method="GET">
             <div class="boxform">
                 <div class="form">
 

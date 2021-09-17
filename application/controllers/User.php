@@ -13,6 +13,17 @@ class User extends CI_Controller
         $this->load->view('templates/user_footer');
     }
 
+    public function search_katalog()
+    {
+        $this->load->model('usermodel');
+        $nama = $this->input->get('search');
+        $data['produk'] = $this->usermodel->getSearchProduk($nama);
+        $this->load->view('templates/user_header');
+        $this->load->view('templates/user_navbar');
+        $this->load->view('user/index', $data);
+        $this->load->view('templates/user_footer');
+    }
+
     public function admin()
     {
         $data['title'] = 'My Profile';

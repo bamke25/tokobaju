@@ -3,7 +3,9 @@
     <div class="katalog">
     <?php
     $id=0;
-    foreach ($produk as $val) {    # code...} {?>
+    foreach ($produk as $val) {  
+
+      # code...} {?>
             <input type="hidden" id="ket<?= $id ?>" value="<?= $val['keterangan'];?>" />
             <ul>
                 <?php $img = $val['gambar'];  ?>
@@ -22,10 +24,8 @@
     </div>
 <script type="text/javascript">
     $(function(){
-      // Selector Tag
-      var id,keterangan,imageproduk, namaproduk, hargaproduk;
-      var img_card, judul_card, harga_card, deskripsi_card
       $('.btnfo').click(function(){
+        var id,keterangan,imageproduk, namaproduk, hargaproduk;
         id = $(this).children().html();
         keterangan = $('#ket'+id).val();
         imageproduk = $('#imgprod'+id).attr("src");
@@ -35,12 +35,7 @@
         $("#judul_card").text(namaproduk);
         $("#harga_card").text(hargaproduk);
         $("#deskripsi_card").text(keterangan);
-
-
-
-        
-      });
-      
+      });   
     });
 </script>
     

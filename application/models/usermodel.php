@@ -6,5 +6,9 @@ class Usermodel extends CI_Model{
         $data = $this->db->query("SELECT * FROM produk");
         return $data->result_array();
     }
+    public function getSearchProduk($nama){
+        $data = $this->db->query("SELECT * FROM produk WHERE nama_produk LIKE '%$nama%'");
+        return $data->result_array();
+    }
 }
 ?>
