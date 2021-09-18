@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Sep 2021 pada 08.03
+-- Waktu pembuatan: 18 Sep 2021 pada 11.00
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `detail_pembelian`
+--
+
+CREATE TABLE `detail_pembelian` (
+  `id_pembelian_detail` int(11) NOT NULL,
+  `id_pembelian` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `harga_pesan` int(11) NOT NULL,
+  `jumlah_pesan` int(11) NOT NULL,
+  `satuan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `kategori_produk`
 --
 
@@ -31,6 +46,33 @@ CREATE TABLE `kategori_produk` (
   `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kategori_produk`
+--
+
+INSERT INTO `kategori_produk` (`id_kategori`, `nama_kategori`) VALUES
+(3, 'Jaket'),
+(4, 'Kaos');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembelian`
+--
+
+CREATE TABLE `pembelian` (
+  `id_pembelian` int(11) NOT NULL,
+  `kode_pembelian` varchar(50) NOT NULL,
+  `waktu_beli` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pembelian`
+--
+
+INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `waktu_beli`) VALUES
+(1, '', '2021-09-18 09:13:44');
 
 -- --------------------------------------------------------
 
@@ -43,11 +85,40 @@ CREATE TABLE `produk` (
   `id_kategori` int(11) NOT NULL,
   `nama_produk` varchar(128) NOT NULL,
   `satuan` varchar(50) NOT NULL,
+  `harga_beli` int(11) NOT NULL,
   `harga` int(11) NOT NULL,
   `berat` varchar(50) NOT NULL,
-  `gambar` varchar(256) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `gambar` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `produk`
+--
+
+INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `satuan`, `harga_beli`, `harga`, `berat`, `keterangan`, `gambar`) VALUES
+(9, 1, 'Kaos O-Neck', 'pcs', 0, 75000, '300', 'Nyaman dipakai sehari-hari', ''),
+(11, 3, 'Jaket Bomber', 'pcs', 0, 200000, '1000', 'Nyaman dipakai saat dingin', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `rekening`
+--
+
+CREATE TABLE `rekening` (
+  `id_rekening` int(11) NOT NULL,
+  `nama_bank` varchar(50) NOT NULL,
+  `no_rekening` varchar(50) NOT NULL,
+  `pemilik_rekening` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `rekening`
+--
+
+INSERT INTO `rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `pemilik_rekening`) VALUES
+(6, 'BRI', '12345678', 'MasCitra');
 
 -- --------------------------------------------------------
 
@@ -71,7 +142,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(1, 'Admin', 'admin@gmail.com', 'default.jpg', '$2y$10$vTKH9zO5.Z8IoLjoxI1/GupqdmGnwY0JJ7MrzNMtG8EL/fJ3qZRFi', 1, 1, 1631065225),
+(1, 'Admin', 'admin@gmail.com', 'default.jpg', '$2y$10$f2Q9Dvb2t39FlNpgBKNhGOI06KRmQUu.tW/A1/W1g55anU2dEmB7S', 1, 1, 1631065225),
 (3, 'Member', 'member@gmail.com', 'default.jpg', '$2y$10$dpLGATIOqhpsawwatpcrceStcIC9w5Vrl.GR6DdpdQDyIKZHFXmw2', 2, 1, 1631069194);
 
 -- --------------------------------------------------------
@@ -98,16 +169,34 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 --
 
 --
+-- Indeks untuk tabel `detail_pembelian`
+--
+ALTER TABLE `detail_pembelian`
+  ADD PRIMARY KEY (`id_pembelian_detail`);
+
+--
 -- Indeks untuk tabel `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
+-- Indeks untuk tabel `pembelian`
+--
+ALTER TABLE `pembelian`
+  ADD PRIMARY KEY (`id_pembelian`);
+
+--
 -- Indeks untuk tabel `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
+
+--
+-- Indeks untuk tabel `rekening`
+--
+ALTER TABLE `rekening`
+  ADD PRIMARY KEY (`id_rekening`);
 
 --
 -- Indeks untuk tabel `user`
@@ -126,16 +215,34 @@ ALTER TABLE `user_role`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `detail_pembelian`
+--
+ALTER TABLE `detail_pembelian`
+  MODIFY `id_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `pembelian`
+--
+ALTER TABLE `pembelian`
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT untuk tabel `rekening`
+--
+ALTER TABLE `rekening`
+  MODIFY `id_rekening` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
