@@ -27,13 +27,3 @@
 </div>
 
 
-
-
-<!-- <tr>
-        <th scope='row'>Harga Beli</th>
-        <td><input type='number' class='form-control' name='d'></td>
-    </tr>
-    <tr>
-        <th scope='row'>Harga Reseller</th>
-        <td><input type='number' class='form-control' name='e'></td>
-    </tr> -->

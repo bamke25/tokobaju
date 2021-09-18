@@ -28,12 +28,15 @@
 
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php foreach ($produk as $p) : ?>
+                        <?php 
+                        // $jual = $this->ModelProduk->jual($row['id_produk'])->row_array();
+                        // $beli = $this->ModelProduk->beli($row['id_produk'])->row_array();
+                        foreach ($produk as $p) : ?>
                             <tr>
                                 <td><?= $no; ?></td>
                                 <td><?= $p['nama_produk']; ?></td>
                                 <td><?= $p['harga']; ?></td>
-
+                                
                                 <td><?= $p['satuan']; ?></td>
                                 <td><?= $p['berat']; ?></td>
                                 <td>

@@ -54,12 +54,10 @@
   </script>
 
   <script type="text/javascript">
-        function confirm_modal(delete_url) {
-            $('#hapusModal').modal('show', {
-                backdroup: 'static'
-            });
-            document.getElementById('delete_link').setAttribute('href', delete_url);
-        }
+      function confirm_modal(delete_url) {
+          $('#hapusModal').modal('show', {
+              backdroup: 'static'
+          });
+          document.getElementById('delete_link').setAttribute('href', delete_url);
+      }
   </script>
-
-  

@@ -47,9 +47,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer">
+                <div class="card-footer">
                     <button type="submit" name="submit" class="btn btn-info">Tambahkan</button>
-                    <a href=""><button type="button" class="btn btn-default pull-right">Cancel</button></a>
+                    <a style="float: right; margin:2px;" href="<?= base_url('admin/produk'); ?>"><button type="button" class="btn btn-dark">Cancel</button></a>
                 </div>
             </form>
         </div>
