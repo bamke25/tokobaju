@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Sep 2021 pada 11.00
+-- Waktu pembuatan: 19 Sep 2021 pada 19.08
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -34,6 +34,31 @@ CREATE TABLE `detail_pembelian` (
   `harga_pesan` int(11) NOT NULL,
   `jumlah_pesan` int(11) NOT NULL,
   `satuan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_pembelian`
+--
+
+INSERT INTO `detail_pembelian` (`id_pembelian_detail`, `id_pembelian`, `id_produk`, `harga_pesan`, `jumlah_pesan`, `satuan`) VALUES
+(5, 3, 9, 0, 10, 'pcs'),
+(6, 3, 12, 0, 10, 'pcs'),
+(7, 3, 13, 0, 20, 'pcs');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_penjualan`
+--
+
+CREATE TABLE `detail_penjualan` (
+  `id_penjualan_detail` int(11) NOT NULL,
+  `id_penjualan` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `harga_jual` int(11) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `keterangan_order` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -72,7 +97,25 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `waktu_beli`) VALUES
-(1, '', '2021-09-18 09:13:44');
+(3, '', '2021-09-19 18:56:50');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `penjualan`
+--
+
+CREATE TABLE `penjualan` (
+  `id_penjualan` int(11) NOT NULL,
+  `kode_transaksi` varchar(50) NOT NULL,
+  `id_pembeli` int(11) NOT NULL,
+  `kurir` varchar(256) NOT NULL,
+  `service` varchar(256) NOT NULL,
+  `ongkir` int(11) NOT NULL,
+  `resi` varchar(256) NOT NULL,
+  `waktu_transaksi` datetime NOT NULL,
+  `proses` enum('0','1','2','3','4') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -97,8 +140,8 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `satuan`, `harga_beli`, `harga`, `berat`, `keterangan`, `gambar`) VALUES
-(9, 1, 'Kaos O-Neck', 'pcs', 0, 75000, '300', 'Nyaman dipakai sehari-hari', ''),
-(11, 3, 'Jaket Bomber', 'pcs', 0, 200000, '1000', 'Nyaman dipakai saat dingin', '');
+(12, 4, 'Kaos O-Neck', 'pcs', 0, 75000, '300', 'Nyaman dipakai', ''),
+(13, 3, 'Jaket Bomber', 'pcs', 0, 200000, '1000', 'Nyaman dipakai saat dingin', '');
 
 -- --------------------------------------------------------
 
@@ -175,6 +218,12 @@ ALTER TABLE `detail_pembelian`
   ADD PRIMARY KEY (`id_pembelian_detail`);
 
 --
+-- Indeks untuk tabel `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  ADD PRIMARY KEY (`id_penjualan_detail`);
+
+--
 -- Indeks untuk tabel `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
@@ -185,6 +234,12 @@ ALTER TABLE `kategori_produk`
 --
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`id_pembelian`);
+
+--
+-- Indeks untuk tabel `penjualan`
+--
+ALTER TABLE `penjualan`
+  ADD PRIMARY KEY (`id_penjualan`);
 
 --
 -- Indeks untuk tabel `produk`
@@ -218,7 +273,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT untuk tabel `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
-  MODIFY `id_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  MODIFY `id_penjualan_detail` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori_produk`
@@ -230,13 +291,19 @@ ALTER TABLE `kategori_produk`
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `penjualan`
+--
+ALTER TABLE `penjualan`
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `rekening`
