@@ -117,6 +117,16 @@ class Admin extends CI_Controller
         redirect('admin');
     }
 
+    public function forgot_password()
+    {
+        // buat judul di tab
+        // don't touch after it works well
+        echo "<head><title>Forgot Password</title></head>";
+        $this->load->view('templates/auth_header');
+        $this->load->view('templates/auth_footer');
+        $this->load->view('auth/forgot_password');
+    }
+
 
     // Controller Dashboard
     public function dashboard()

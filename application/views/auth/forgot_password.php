@@ -16,8 +16,8 @@
 
                                     <p style="color: black;">Enter your email to change your forgotten password</p>
                                 </div>
-                                <?= //$this->session->flashdata('message'); ?>
-                                <form class="user" method="POST" action="<?= base_url('auth'); ?>">
+
+                                <form class="user" method="POST" action="<?= base_url('admin'); ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="email" name="email" value="<?= set_value('email'); ?>" placeholder="Enter Email Address...">
                                         <?= form_error('email', '<small class="text-danger pl-3" >', '</small>'); ?>
@@ -29,10 +29,10 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?php echo site_url('auth');?>">Login</a>
+                                    <a class="small" href="<?= base_url('admin'); ?>">Login</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= base_url('auth/registration'); ?>">Create an Account!</a>
+                                    <a class="small" href="<?= base_url('admin/registration'); ?>">Create an Account!</a>
                                 </div>
                             </div>
                         </div>
