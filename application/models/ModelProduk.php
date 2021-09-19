@@ -36,11 +36,11 @@ class ModelProduk extends CI_model
     }
 
     public function jual($id){
-        return $this->db->query("SELECT sum(a.jumlah) as jual FROM rb_penjualan_detail a JOIN rb_penjualan b ON a.id_penjualan=b.id_penjualan where a.id_produk='$id' AND b.proses='1'");
+        return $this->db->query("SELECT sum(a.jumlah) as jual FROM detail_penjualan a JOIN penjualan b ON a.id_penjualan=b.id_penjualan where a.id_produk='$id' AND b.proses='1'");
     }
 
     public function beli($id){
-        return $this->db->query("SELECT sum(a.jumlah_pesan) as beli FROM rb_pembelian_detail a where a.id_produk='$id'");
+        return $this->db->query("SELECT sum(a.jumlah_pesan) as beli FROM detail_pembelian a where a.id_produk='$id'");
     }
 
 
