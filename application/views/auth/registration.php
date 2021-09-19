@@ -10,7 +10,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('auth/registration'); ?>">
+                                <form class="user" method="POST" action="<?= base_url('admin/registration'); ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="name" placeholder="Full Nmae" value="<?= set_value('name'); ?>">
                                         <?= form_error('name', '<small class="text-danger pl-3">', '</small> '); ?>
@@ -34,7 +34,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?= base_url('auth'); ?>">Already have an account? Login!</a>
+                                    <a class="small" href="<?= base_url('admin'); ?>">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>

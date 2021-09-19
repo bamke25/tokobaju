@@ -15,7 +15,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Login Page</h1>
                                 </div>
                                 <?= $this->session->flashdata('message'); ?>
-                                <form class="user" method="POST" action="<?= base_url('auth'); ?>">
+                                <form class="user" method="POST" action="<?= base_url('admin'); ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="email" name="email" value="<?= set_value('email'); ?>" placeholder="Enter Email Address...">
                                         <?= form_error('email', '<small class="text-danger pl-3" >', '</small>'); ?>
@@ -34,7 +34,7 @@
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= base_url('auth/registration'); ?>">Create an Account!</a>
+                                    <a class="small" href="<?= base_url('admin/registration'); ?>">Create an Account!</a>
                                 </div>
                             </div>
                         </div>

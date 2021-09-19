@@ -6,11 +6,120 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('form_validation');
         $this->load->model('ModelAdmin');
         $this->load->model('ModelRekening');
         $this->load->model('ModelProduk');
     }
+
+
+
+    // Login dan Registrasi
     public function index()
+    {
+        $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('password', 'password', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Login';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/login');
+            $this->load->view('templates/auth_footer');
+        } else {
+            // Validasi sukses
+            $this->_login();
+        }
+    }
+
+    private function _login()
+    {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        // Jika user ada
+        if ($user) {
+            // Jika user aktif
+            if ($user['is_active'] == 1) {
+                // Cek password
+                if (password_verify($password, $user['password'])) {
+                    $data = [
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id']
+                    ];
+                    $this->session->set_userdata($data);
+                    redirect('admin/dashboard');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                this password is wrong!!</div>');
+                    redirect('admin');
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                this email has not been activated!</div>');
+                redirect('admin');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            this email not registered</div>');
+            redirect('admin');
+        }
+    }
+
+    public function registration()
+    {
+        $this->form_validation->set_rules('name', 'name', 'required|trim');
+        $this->form_validation->set_rules(
+            'email',
+            'email',
+            'required|trim|valid_email|is_unique[user.email]',
+            [
+                'is_unique' => 'this email has already registered!'
+            ]
+        );
+        $this->form_validation->set_rules(
+            'password1',
+            'password',
+            'required|trim|min_length[5]|matches[password2]',
+            [
+                'matches' => 'password do not match!',
+                'min_length' => 'password too short!'
+            ]
+        );
+        $this->form_validation->set_rules('password2', 'password', 'required|trim|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Registation';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/registration');
+            $this->load->view('templates/auth_footer');
+        } else {
+            $data = [
+                'name' => htmlspecialchars($this->input->post('name', true)),
+                'email' => htmlspecialchars($this->input->post('email', true)),
+                'image' => 'default.jpg',
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+                'role_id' => 2,
+                'is_active' => 1,
+                'date_created' => time()
+            ];
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Congratulations! Your Account has been createrd. Please Login!</div>');
+            redirect('admin');
+        }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        You have been logout!</div>');
+        redirect('admin');
+    }
+
+
+    // Controller Dashboard
+    public function dashboard()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Dashboard';
@@ -20,6 +129,9 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
+
+    // Controller Produk
     public function produk()
     {
         $data['produk'] = $this->ModelProduk->view_produk();
@@ -29,54 +141,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/produk/produk', $data);
         $this->load->view('templates/footer');
-    }
-
-    public function kategori_produk()
-    {
-        $data['kategori'] = $this->ModelAdmin->view_kategori();
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Kategori Produk';
-
-        $this->form_validation->set_rules('kategori', 'kategori produk', 'required');
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/kategori/kategori', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->ModelAdmin->tambah_kategori_produk();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kategori produk berhasil ditambahkan!</div>');
-            redirect('admin/kategori_produk');
-        }
-    }
-
-    public function edit_kategori()
-    {
-        if (isset($_POST['submit'])) {
-            $data = array('nama_kategori' => $this->input->post('nama_kategori'));
-            $where = array('id_kategori' => $this->input->post('id'));
-            $this->ModelAdmin->update_kategori('kategori_produk', $data, $where);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kategori produk berhasil diupdate!</div>');
-            redirect('admin/kategori_produk');
-        } else {
-            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-            $data['title'] = 'Edit kategori produk';
-            $id = $this->uri->segment(3);
-            $edit = $this->ModelAdmin->edit_kategori('kategori_produk', array('id_kategori' => $id))->row_array();
-            $dataa = array('kategori' => $edit);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/kategori/edit_kategori', $dataa);
-            $this->load->view('templates/footer');
-        }
-    }
-
-    public function delete_kategori()
-    {
-        $id = array('id_kategori' => $this->uri->segment(3));
-        $this->ModelAdmin->delete('kategori_produk', $id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Produk berhasil dihapus!</div>');
-        redirect('admin/kategori_produk');
     }
 
     public function tambah_produk()
@@ -180,6 +244,61 @@ class Admin extends CI_Controller
     }
 
 
+
+    // Controller Kategori
+    public function kategori_produk()
+    {
+        $data['kategori'] = $this->ModelAdmin->view_kategori();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Kategori Produk';
+
+        $this->form_validation->set_rules('kategori', 'kategori produk', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/kategori/kategori', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->ModelAdmin->tambah_kategori_produk();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kategori produk berhasil ditambahkan!</div>');
+            redirect('admin/kategori_produk');
+        }
+    }
+
+    public function edit_kategori()
+    {
+        if (isset($_POST['submit'])) {
+            $data = array('nama_kategori' => $this->input->post('nama_kategori'));
+            $where = array('id_kategori' => $this->input->post('id'));
+            $this->ModelAdmin->update_kategori('kategori_produk', $data, $where);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kategori produk berhasil diupdate!</div>');
+            redirect('admin/kategori_produk');
+        } else {
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['title'] = 'Edit kategori produk';
+            $id = $this->uri->segment(3);
+            $edit = $this->ModelAdmin->edit_kategori('kategori_produk', array('id_kategori' => $id))->row_array();
+            $dataa = array('kategori' => $edit);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/kategori/edit_kategori', $dataa);
+            $this->load->view('templates/footer');
+        }
+    }
+
+    public function delete_kategori()
+    {
+        $id = array('id_kategori' => $this->uri->segment(3));
+        $this->ModelAdmin->delete('kategori_produk', $id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Produk berhasil dihapus!</div>');
+        redirect('admin/kategori_produk');
+    }
+
+
+
+
+
+    // Controller Member
     public function member()
     {
         $data['member'] = $this->ModelAdmin->member();
@@ -204,6 +323,10 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
+
+
+    // Controller Rekening
     public function rekening()
     {
         $data['rekening'] = $this->ModelRekening->rekening();
@@ -258,23 +381,26 @@ class Admin extends CI_Controller
         }
     }
 
+
+
+    // Controller Stok Barang
     public function tambah_stok_barang()
     {
-        if (isset($_POST['submit1'])){
-			if ($this->session->idp == ''){
-				$data = array(
-			        		  'waktu_beli'=>date('Y-m-d H:i:s'));
-				$this->ModelAdmin->insert('pembelian',$data);
-				$idp = $this->db->insert_id();
-				$this->session->set_userdata(array('idp'=>$idp));
-			}else{
-				$data = array('waktu_beli'=>date('Y-m-d H:i:s'));
-				$where = array('id_pembelian' => $this->session->idp);
-				$this->ModelAdmin->update('pembelian', $data, $where);
-			}
-			redirect('admin/tambah_stok_barang');
-
-		}else
+        if (isset($_POST['submit1'])) {
+            if ($this->session->idp == '') {
+                $data = array(
+                    'waktu_beli' => date('Y-m-d H:i:s')
+                );
+                $this->ModelAdmin->insert('pembelian', $data);
+                $idp = $this->db->insert_id();
+                $this->session->set_userdata(array('idp' => $idp));
+            } else {
+                $data = array('waktu_beli' => date('Y-m-d H:i:s'));
+                $where = array('id_pembelian' => $this->session->idp);
+                $this->ModelAdmin->update('pembelian', $data, $where);
+            }
+            redirect('admin/tambah_stok_barang');
+        } else
         if (isset($_POST['submit'])) {
             if ($this->input->post('idpd') == '') {
                 $data = array(
@@ -300,8 +426,8 @@ class Admin extends CI_Controller
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['title'] = 'Stok Barang';
             $data['produk'] = $this->ModelAdmin->view_ordering('produk', 'id_produk', 'ASC');
-            $data['record'] = $this->ModelAdmin->view_join_where('detail_pembelian','produk','id_produk',array('id_pembelian'=>$this->session->idp),'id_pembelian_detail','DESC');
-            $data['rows'] = $this->ModelAdmin->view_where('pembelian',array('id_pembelian'=>$this->session->idp))->row_array();
+            $data['record'] = $this->ModelAdmin->view_join_where('detail_pembelian', 'produk', 'id_produk', array('id_pembelian' => $this->session->idp), 'id_pembelian_detail', 'DESC');
+            $data['rows'] = $this->ModelAdmin->view_where('pembelian', array('id_pembelian' => $this->session->idp))->row_array();
             if ($this->uri->segment(3) != '') {
                 $data['row'] = $this->ModelAdmin->view_where('detail_pembelian', array('id_pembelian_detail' => $this->uri->segment(3)))->row_array();
             }
@@ -312,10 +438,11 @@ class Admin extends CI_Controller
         }
     }
 
-    public function delete_tambah_stok_barang(){
-		$id = array('id_pembelian_detail' => $this->uri->segment(3));
-		$this->ModelAdmin->delete('detail_pembelian',$id);
+    public function delete_tambah_stok_barang()
+    {
+        $id = array('id_pembelian_detail' => $this->uri->segment(3));
+        $this->ModelAdmin->delete('detail_pembelian', $id);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Stok barang berhasil dihapus!</div>');
-		redirect('admin/tambah_stok_barang');
-	}
+        redirect('admin/tambah_stok_barang');
+    }
 }
