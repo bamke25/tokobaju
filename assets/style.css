@@ -44,6 +44,23 @@ table {
 button{
     text-transform: uppercase;
 }
+.button{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 30px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+}
 /* ======================================================================= */
 
 
@@ -120,6 +137,10 @@ nav ul li a img{
 .navbutton img{
     width: 40px;
     height: 40px;
+}
+.navbutton img:nth-child(2){
+    width: 30px;
+    height: 30px;
 }
 .navbutton img:nth-child(2){
     display: none;
@@ -355,12 +376,12 @@ footer .copyright a{
 }
 /* ======================================================================= */
 
-#sideinfo, #cart, #login, #register, #serach, #account{
+#sideinfo, #cart, #login, #register, #serach, #checkout, #history, #tujuan{
     display: block;
     position: fixed;
     top: 0;
+    bottom: 0;
     width: 100%;
-    min-height: 100vmin;
     background-color: rgba(0, 0, 0, 0.28);
     z-index: 9999;
     color: white;
@@ -376,17 +397,17 @@ footer .copyright a{
     -ms-transition: .5s;
     -o-transition: .5s;
 }
-#sideinfo::before, #cart::before, #login::before, #register::before, #serach::before, #account::before{
+#sideinfo::before, #cart::before, #login::before, #register::before, #serach::before, #checkout::before, #history::before, #tujuan::before{
     content: '';
     display: block;
     position: relative;
     float: right;
     width: 50%;
-    min-height: 100vmin;
+    height: 100%;
     background-color: rgba(255, 255, 255, 1);
     color: white;
 }
-#sideinfo:target, #cart:target, #login:target, #register:target, #serach:target, #account:target{
+#sideinfo:target, #cart:target, #login:target, #register:target, #serach:target, #checkout:target, #history:target, #tujuan:target{
     transform: translateX(0%);
     -webkit-transform: translateX(0%);
     -moz-transform: translateX(0%);
@@ -500,7 +521,7 @@ footer .copyright a{
     margin-top: 30px;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 1);
-    border: solid 0px blueviolet;
+    border: solid 0px rgb(0, 0, 0);
     color: white;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -511,13 +532,17 @@ footer .copyright a{
 .shoppingcart{
     display: block;
     position: relative;
-    min-height: 100vmin;
+    background-color: white;
 }
 .shoppingcart table{
     width: 100%;
     text-align: center;
     padding: 10px;
     box-sizing: border-box;
+}.shoppingcart table tr:nth-child(1){
+    margin-bottom: 30px;
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 .shoppingcart table tr th{
     text-transform: uppercase;
@@ -525,25 +550,56 @@ footer .copyright a{
 .shoppingcart table tr td{
     min-width: 50px;
 }
+.shoppingcart table tr td span{
+    margin-right: 10px;
+}
 .shoppingcart table tr td a{
     text-decoration: none;
     text-transform: uppercase;
     color: black;
     font-size: 15px;
 }
-.shoppingcart table tr input{
-    width: 50px;
+.shoppingcart table tr input, .shoppingcart table select{
+    width: 60px;
+    height: 20px;
+    box-sizing: border-box;
 }
 .shoppingcart table tr img{
     width: 150px;
 }
-.shoppingcart table ~ h4 span{
+.shoppingcart table ~ .keterangan{
+    float: right;
+    margin-right: 20px;
+}
+.shoppingcart table ~ .keterangan select{
+    width: 200px;
+    margin-top: 50px;
+    text-transform: uppercase;
+    border: none;
+    border-bottom: 1px solid black;
+}
+.shoppingcart table ~ .keterangan select option{
+    text-transform: uppercase;
+}
+.shoppingcart table ~ .keterangan select:focus{
+    outline: none;
+}
+.shoppingcart table ~ .keterangan h4 span{
     margin-right: 10px;
 }
-.shoppingcart table ~ button, .shoppingcart table ~ .update, .shoppingcart table ~ label{
+.actionbutton{
+    width: 100%;
+    height: 100px;
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.shoppingcart table ~ .actionbutton button, .shoppingcart table ~ .actionbutton .button{
     display: block;
-    width: 100px;
+    min-width: 100px;
     height: 30px;
+    line-height: 30px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -551,36 +607,22 @@ footer .copyright a{
     -o-border-radius: 5px;
     background-color: black;
     color: white;
-    cursor: pointer;
-    position: absolute;
-    margin: auto;
-    right: 5px;
-    margin-top: 100px;
-}
-.shoppingcart table ~ label{
-    bottom: -100px;
-
-}
-.shoppingcart table ~ input{
-    display: none;
-}
-.shoppingcart table ~ label{
-    position: relative;
-    margin: auto;
-    text-align: center;
-    line-height: 30px;
-    text-transform: uppercase;
-    width: 250px;
-}
-.shoppingcart table ~ .update{
-    right: 150px;
     text-align: center;
     text-decoration: none;
-    line-height: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-right: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
 }
+
 .shoppingcart table ~ button:active, .shoppingcart table ~ .update:active{
     background-color: rgb(255, 255, 255);
     color: black;
+}
+.account{
+    width: 80%;
+    margin: auto;
 }
 .boxform{
     width: 100%;
@@ -622,9 +664,9 @@ footer .copyright a{
     -ms-transition: .3s;
     -o-transition: .3s;
 }
-.boxform button, .boxform .register{
+.boxform button,.boxform .button, .boxform .register{
     display: inline-block;
-    width: 100px;
+    min-width: 100px;
     height: 30px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -634,8 +676,8 @@ footer .copyright a{
     background-color: black;
     color: white;
     cursor: pointer;
-    width: 100%;
     text-transform: uppercase;
+    margin-bottom: 20px;
 }
 .boxform .register{
     right: 0;
@@ -668,9 +710,13 @@ footer .copyright a{
         font-size: 13px;
     }
     .shoppingcart table tr th{
-        font-size: 15px;
+        font-size: 12px;
     }
     .shoppingcart table tr td a{
         font-size: 12px;
+    }
+    .account{
+        width: 100%;
+        margin: auto;
     }
 }
