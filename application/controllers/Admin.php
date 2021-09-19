@@ -245,7 +245,7 @@ class Admin extends CI_Controller
 
 
 
-    // Controller Kategori
+    // Controller Kategori Produk
     public function kategori_produk()
     {
         $data['kategori'] = $this->ModelAdmin->view_kategori();
