@@ -108,11 +108,11 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="" class="contentinfo">
+        <form method="POST" action="<?= base_url('user/login/');?>" class="contentinfo">
             <div class="boxform">
                 <div class="form">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="example@gmail.com">
+                    <label for="Email">Email</label>
+                    <input type="text" name="email" id="email" placeholder="example@gmail.com">
                 </div>
                 <div class="form">
                     <label for="password">password</label>
@@ -139,7 +139,7 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="" class="contentinfo">
+        <form action="<?php echo base_url('user/register/')?>" method="POST" class="contentinfo">
             <div class="boxform">
                 <div class="form">
                     <label for="name">name</label>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="form">
                     <label for="regusername">Username</label>
-                    <input type="text" name="regusername" id="regusername" placeholder="example@gmail.com">
+                    <input type="text" name="regemail" id="regusername" placeholder="example@gmail.com">
                 </div>
                 <div class="form">
                     <label for="regpassword">password</label>
