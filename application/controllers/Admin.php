@@ -10,6 +10,7 @@ class Admin extends CI_Controller
         $this->load->model('ModelAdmin');
         $this->load->model('ModelRekening');
         $this->load->model('ModelProduk');
+        $this->load->model('ModelOrders');
     }
 
 
@@ -454,5 +455,31 @@ class Admin extends CI_Controller
         $this->ModelAdmin->delete('detail_pembelian', $id);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Stok barang berhasil dihapus!</div>');
         redirect('admin/tambah_stok_barang');
+    }
+
+
+
+
+    // Controller Konfirmasi
+    public function konfirmasi()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Konfirmasi Pembayaran Pesanan';
+        $data['record'] = $this->ModelOrders->konfirmasi_bayar();
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/penjualan/konfirmasi', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+
+
+    // Controller Orders
+    public function orders()
+    {
+        $data['title'] = 'Laporan Pesanan Masuk';
+        $data['record'] = $this->ModelOrders->orders_report_all();
+        $this->template->load('administrator/template', 'administrator/mod_penjualan/view_orders_report', $data);
     }
 }
