@@ -12,47 +12,7 @@
 
 <!-- Bagian Account -->
 
-<div id="account">
-        <div class="navinfo" id="navinfo">
-            <div class="info">
-                account
-            </div>
-            <div class="close">
-                <a href="#"></a>
-            </div>
-        </div>
-        <form action="" class="contentinfo">
-            <div class="shoppingcart">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>price</th>
-                        <th>quantity</th>
-                        <th>size</th>
-                        <th>total</th>
-                    </tr>
 
-                    <?php for ($i = 0; $i < 2; $i++){ ?>
-                    <tr>
-                        <td><img src="<?= base_url('assets/img/sholat yuuk.jpg')?>" alt="#">
-                        </td>
-                        <td>30$</td>
-                        <td>3</td>
-                        <td>L</td>
-                        <td>30$</td>
-                    </tr>
-                    <?php } ?>
-
-                </table>
-                <h4 style="text-align: center;"><span>Subtotal</span>60$</h4>
-                <h4>
-                    BNI: 01910191018 <br> Mandiri: 0101009101101 <br> BCA:0109201910
-                </h4>
-                <label for="file">upload bukti transfer</label>
-                <input type="file" name="file" id="file" class="inputfile" />
-            </div>
-        </form>
-</div>
 
 <!-- Bagian Cart -->
 
@@ -65,33 +25,54 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="" class="contentinfo">
+        <form action="<?=base_url('user/editKeranjang')?>" class="contentinfo" method="POST">
             <div class="shoppingcart">
                 <table>
                     <tr>
                         <th></th>
-                        <th>price</th>
+                        <th>Harga</th>
                         <th>quantity</th>
-                        <th>size</th>
                         <th>total</th>
                     </tr>
 
-                    <?php for ($i = 0; $i < 2; $i++){ ?>
+                    <?php
+                    $id=0;
+                     foreach ($keranjang as $value) {
+                     $id_cart =  $value['id'];
+                        ?>
                     <tr>
+                        <input type="hidden" id="id_produk<?=$id?>">
+                        <input type="hidden" name="id[]" value="<?=$id_cart?>">
+                        <input type="hidden" name="harga[]" value="<?=$value['harga']?>">
 
-                        <td><img src="<?= base_url('assets/img/sholat yuuk.jpg')?>" alt="#"> <a href="">remove</a>
+                        <td><img src="<?= base_url($value['gambar'])?>" alt="#"> <a href="<?= base_url('user/delete_cart/'.$id_cart)?>">remove</a>
                         </td>
-                        <td>30$</td>
-                        <td><input type="number" value="1"/></td>
-                        <td>L</td>
-                        <td>30$</td>
+                        <td id="harga">Rp <?= number_format($value['harga'],2,',','.');?></td>
+                        <td><input id="qty<?=$id?>" name="qty[]" type="number" value="<?= $value['quantity'] ?>"/></td>
+                        <!-- <td>
+                            <select name="" id="">
+                                <option value="">M</option>
+                                <option value="">L</options>
+                                <option value="">XL</option>
+                            </select>
+                        </td> -->
+                        <td>Rp <?= number_format($value['total'],2,',','.');?></td>
                     </tr>
-                    <?php } ?>
+                    <?php
+                     } ?>
 
                 </table>
-                <h4 style="float: right;margin-right:10px;"><span>Subtotal</span>30$</h4>
-                <button>checkout</button>
-                <a class="update" href="#">Update</a>
+                <div class="keterangan">
+                        <select name="kurir" id="kurir">
+                            <option value="">Pilih Kurir</option>
+                            <option value="">JNE</option>
+                            <option value="">JNT</option>
+                        </select></td>
+                </div>
+                <div class="actionbutton">
+                    <input id="ganti" class="button" type="submit" value="Update">
+                    <a class="button" href="#tujuan">next</a>
+                </div>
             </div>
         </form>
         </div>
@@ -193,7 +174,8 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="" class="contentinfo">
+        <form class="contentinfo" method="post" action="<?=base_url("user/cart")?>">
+            <input name="id_produk" type="hidden" value="" id="id_produk">
             <ul>
                 <li><img id="img_card" src="" alt=""></li>
                 <li><h4 id="judul_card"></h4></li>
@@ -202,10 +184,10 @@
                 <li>
                     <div class="number">
                         <span>quantity</span>
-                        <input type="number" value="1"/>
+                        <input name="quantity" type="number" value="1"/>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <div class="size">
                         <span>Size</span>
                         <select name="" id="">
@@ -214,9 +196,9 @@
                             <option value="">XL</option>
                         </select>
                     </div>
-                </li>
+                </li> -->
                 <li>
-                    <button class="btnsumbit">Add Cart</button>
+                    <input type="submit" class="btnsumbit" value="Add Cart">
                 </li>
             </ul>
         </form>
@@ -224,3 +206,137 @@
 
 <!-- Shoppe All -->
 
+
+
+<div id="history">
+        <div class="navinfo" id="navinfo">
+            <div class="info">
+                history
+            </div>
+            <div class="close">
+                <a href="#"></a>
+            </div>
+        </div>
+        <form action="" class="contentinfo">
+            <div class="shoppingcart">
+                <table>
+                    <tr>
+                        <th>tanggal</th>
+                        <th>proses</th>
+                        <th>status</th>
+                        <th>no resi</th>
+                        <th>aksi</th>
+                    </tr>
+
+                    <?php for ($i = 0; $i < 1; $i++){ ?>
+                    <tr>
+                        <td>9/19/2021</td>
+                        <td>sudah di proses</td>
+                        <td>lunas</td>
+                        <td>728829299282</td>
+                        <td><a class="button" style="color: white;" href="#checkout">checkout</a></td>
+                    </tr>
+                    <?php } ?>
+
+                </table>
+            </div>
+        </form>
+        </div>
+
+
+<div id="tujuan">
+        <div class="navinfo" id="navinfo">
+            <div class="info">
+                alamat tujuan
+            </div>
+            <div class="close">
+                <a href="#"></a>
+            </div>
+        </div>
+        <form action="" class="contentinfo">
+            <div class="boxform">
+                    <div class="form">
+                        <label for="name">nama</label>
+                        <input type="text" name="name" id="name" placeholder="masukan nama anda">
+                    </div>
+                    <div class="form">
+                        <label for="tlp">No telepon</label>
+                        <input type="text" tlp="tlp" id="tlp" placeholder="masukan no telepon">
+                    </div>
+                    <div class="form">
+                        <label for="profinsi">profinsi</label>
+                        <input type="text" name="profinsi" id="profinsi" placeholder="masukan profinsi anda">
+                    </div>
+                    <div class="form">
+                        <label for="kota">Kota</label>
+                        <input type="text" name="Kota" id="Kota" placeholder="masukan kota anda">
+                    </div>
+                    <div class="form">
+                        <label for="kecematan">kecematan</label>
+                        <input type="text" name="kecematan" id="kecematan" placeholder="masukan kecematan anda">
+                    </div>
+                    <div class="form">
+                        <label for="kelurahan">kelurahan</label>
+                        <input type="text" name="kelurahan" id="kelurahan" placeholder="masukan kelurahan anda">
+                    </div>
+                    <div class="form">
+                        <label for="alamat">alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="masukan alamat anda">
+                    </div>
+                    <div class="form">
+                        <button type="submit">save</button>
+                        <button type="submit">edit</button>
+                        <a class="button" href="#history">kirim</a>
+                    </div>
+            </div>
+        </form>
+</div>
+
+
+<div id="checkout">
+        <div class="navinfo" id="navinfo">
+            <div class="info">
+                checkout
+            </div>
+            <div class="close">
+                <a href="#"></a>
+            </div>
+        </div>
+        <form action="" class="contentinfo">
+            <div class="shoppingcart">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>price</th>
+                        <th>quantity</th>
+                        <th>size</th>
+                        <th>total</th>
+                    </tr>
+
+                    <?php for ($i = 0; $i < 2; $i++){ ?>
+                    <tr>
+                        <td><img src="assets/img/sholat yuuk.jpg" alt="#">
+                        </td>
+                        <td>30$</td>
+                        <td>3</td>
+                        <td>L</td>
+                        <td>30$</td>
+                    </tr>
+                    <?php } ?>
+
+                </table>
+                <div class="keterangan">
+                    <h4>Total: <span>70$</span></h4>
+                    <h4>
+                        Send To: <br>
+                        BNI: 01910191018 <br> Mandiri: 0101009101101 <br> BCA:0109201910
+                    </h4>
+                </div>
+                <div class="actionbutton">
+                    <input style="display: none;" class="button" type="file" name="file" id="file" class="inputfile" />
+                    <label style="padding: 0 10px 0 10px;" class="button" for="file">upload bukti transfer</label>
+                    <button>save</button>
+                </div>              
+            </div>
+        </form>
+        </div>

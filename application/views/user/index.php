@@ -7,6 +7,7 @@
 
       # code...} {?>
             <input type="hidden" id="ket<?= $id ?>" value="<?= $val['keterangan'];?>" />
+            <input type="hidden" id="id_prod<?= $id ?>" value="<?= $val['id_produk'];?>" >
             <ul>
                 <?php $img = $val['gambar'];  ?>
                 <li class="prod"><img id="imgprod<?= $id ?>" src="<?= base_url($img)?>" alt=""></li>
@@ -23,18 +24,23 @@
         <a class="shopenow" href="">shope now</a>
     </div>
 <script type="text/javascript">
-    $(function(){
+    $(document).ready(function(){
+     $('#ganti').click(function(){
+        alert('jamal');
+     });
       $('.btnfo').click(function(){
-        var id,keterangan,imageproduk, namaproduk, hargaproduk;
+        var id,keterangan,imageproduk, namaproduk, hargaproduk,id_produk;
         id = $(this).children().html();
         keterangan = $('#ket'+id).val();
+        id_produk = $('#id_prod'+id).val();
         imageproduk = $('#imgprod'+id).attr("src");
         namaproduk = $('#namaprod'+id).text();
         hargaproduk = $('#hargapro'+id).text();
         $("#img_card").attr("src", imageproduk);
         $("#judul_card").text(namaproduk);
         $("#harga_card").text(hargaproduk);
-        $("#deskripsi_card").text(keterangan);
+        $("#deskripsi_card").text(keterangan)
+        $("#id_produk").val(id_produk);
       });   
     });
 </script>

@@ -11,7 +11,11 @@ class User extends CI_Controller
     {
         $this->load->model('usermodel');
         $data['produk'] = $this->usermodel->getProduk();
-        $this->load->view('templates/user_header');
+        $data['keranjang'] = $this->usermodel->getKeranjang();
+        $data['jumlah'] = $this->usermodel->getTolkeranjang();
+        $harga = $this->usermodel->getTotalkeranjang();
+        $data['total'] = $harga['total'];
+        $this->load->view('templates/user_header',$data);
         $this->load->view('templates/user_navbar');
         $this->load->view('user/index', $data);
         $this->load->view('templates/user_footer');
@@ -27,6 +31,46 @@ class User extends CI_Controller
         $this->load->view('user/index', $data);
         $this->load->view('templates/user_footer');
     }
+
+    public function cart()
+    {
+        $this->load->model('usermodel');
+        $id_produk = $this->input->post('id_produk');
+        $quantity = $this->input->post('quantity');
+        $harga = $this->usermodel->getHargaProduk($id_produk);
+        $hrg = $harga['harga'];
+        $total = $hrg * $quantity;
+        $data = array(
+                'id_produk' =>$id_produk,
+                'quantity'  =>$quantity,
+                'total'     => $total
+                );
+
+        $this->usermodel->insertKeranjang($data,'keranjang');
+        redirect('user/#cart');
+
+
+    }
+     public function delete_cart($id)
+    {
+        $this->load->model('usermodel');
+        $where = array('id' => $id); 
+        $this->usermodel->deleteKeranjang($where,'keranjang');
+        redirect('user/#cart');
+    }
+     public function editKeranjang()
+    {
+        $this->load->model('usermodel');
+        $id = $this->input->post('id');
+        $harga = $this->input->post('harga');
+        $quantity = $this->input->post('qty');
+        $total = $harga * $quantity;
+        print_r($total);
+        $where = array('id' => $id); 
+        $this->usermodel->deleteKeranjang($where,'keranjang');
+        redirect('user/#cart');
+    }
+
 
     public function admin()
     {
@@ -88,6 +132,7 @@ class User extends CI_Controller
 
     public function login(){
         $this->load->library('form_validation');
+
         $this->load->library('session');
         $this->load->model('Usermodel');
 
