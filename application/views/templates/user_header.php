@@ -112,11 +112,11 @@
             <div class="boxform">
                 <div class="form">
                     <label for="Email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="example@gmail.com">
+                    <input type="text" name="email" id="email" placeholder="example@gmail.com" required>
                 </div>
                 <div class="form">
                     <label for="password">password</label>
-                    <input type="password" name="password" id="password" placeholder="password">
+                    <input type="password" name="password" id="password" placeholder="password" required>
                 </div>
                 <div class="form">
                     <button type="submit">Login</button>
@@ -143,15 +143,15 @@
             <div class="boxform">
                 <div class="form">
                     <label for="name">name</label>
-                    <input type="text" name="name" id="name" placeholder="enter your name">
+                    <input type="text" name="name" id="name" placeholder="enter your name" required>
                 </div>
                 <div class="form">
                     <label for="regusername">Username</label>
-                    <input type="text" name="regemail" id="regusername" placeholder="example@gmail.com">
+                    <input type="text" name="regemail" id="regusername" placeholder="example@gmail.com" required>
                 </div>
                 <div class="form">
                     <label for="regpassword">password</label>
-                    <input type="password" name="regpassword" id="regpassword" placeholder="password">
+                    <input type="password" name="regpassword" id="regpassword" placeholder="type your password" required>
                 </div>
                 <div class="form">
                     <button type="submit">save</button>
