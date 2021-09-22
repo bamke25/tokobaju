@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Sep 2021 pada 19.08
+-- Waktu pembuatan: 21 Sep 2021 pada 05.54
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -83,6 +83,23 @@ INSERT INTO `kategori_produk` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `konfirmasi`
+--
+
+CREATE TABLE `konfirmasi` (
+  `id_konfirmasi_pembayaran` int(11) NOT NULL,
+  `id_penjualan` int(11) NOT NULL,
+  `total_transfer` varchar(50) NOT NULL,
+  `id_rekening` int(11) NOT NULL,
+  `nama_pengirim` varchar(256) NOT NULL,
+  `tanggal_transfer` date NOT NULL,
+  `bukti_transfer` varchar(256) NOT NULL,
+  `waktu_konfirmasi` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pembelian`
 --
 
@@ -97,7 +114,8 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `waktu_beli`) VALUES
-(3, '', '2021-09-19 18:56:50');
+(3, '', '2021-09-19 18:56:50'),
+(4, '', '2021-09-21 05:40:10');
 
 -- --------------------------------------------------------
 
@@ -230,6 +248,12 @@ ALTER TABLE `kategori_produk`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
+-- Indeks untuk tabel `konfirmasi`
+--
+ALTER TABLE `konfirmasi`
+  ADD PRIMARY KEY (`id_konfirmasi_pembayaran`);
+
+--
 -- Indeks untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
@@ -288,10 +312,16 @@ ALTER TABLE `kategori_produk`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `konfirmasi`
+--
+ALTER TABLE `konfirmasi`
+  MODIFY `id_konfirmasi_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan`

@@ -1,12 +1,12 @@
 <?php
 class ModelRekening extends CI_model
 {
-    function rekening()
+    public function rekening()
     {
         return $this->db->get('rekening')->result_array();
     }
 
-    function rekening_tambah()
+    public function rekening_tambah()
     {
         $data = [
             'nama_bank' => htmlspecialchars($this->input->post('nama_bank')),
@@ -16,12 +16,12 @@ class ModelRekening extends CI_model
         $this->db->insert('rekening', $data);
     }
 
-    function rekening_edit($id)
+    public function rekening_edit($id)
     {
         return $this->db->query("SELECT * FROM rekening where id_rekening=$id");
     }
 
-    function rekening_update()
+    public function rekening_update()
     {
         $data = array(
             'nama_bank' => $this->db->escape_str($this->input->post('nama_bank')),
@@ -32,7 +32,7 @@ class ModelRekening extends CI_model
         $this->db->update('rekening', $data);
     }
 
-    function rekening_delete($id)
+    public function rekening_delete($id)
     {
         return $this->db->query("DELETE FROM rekening where id_rekening=$id");
     }
