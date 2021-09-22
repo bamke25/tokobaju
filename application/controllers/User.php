@@ -10,7 +10,7 @@ class User extends CI_Controller
     public function index()
     {
         $this->load->model('usermodel');
-        $data['produk'] = $this->usermodel->getProduk();
+        $data['produk'] = $this->usermodel->getProduk(1);
         $data['keranjang'] = $this->usermodel->getKeranjang();
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
         $harga = $this->usermodel->getTotalkeranjang();
@@ -18,6 +18,19 @@ class User extends CI_Controller
         $this->load->view('templates/user_header',$data);
         $this->load->view('templates/user_navbar');
         $this->load->view('user/index', $data);
+        $this->load->view('templates/user_footer');
+    }
+    public function shopeall()
+    {
+        $this->load->model('usermodel');
+        $data['produk'] = $this->usermodel->getProduk(0);
+        $data['keranjang'] = $this->usermodel->getKeranjang();
+        $data['jumlah'] = $this->usermodel->getTolkeranjang();
+        $harga = $this->usermodel->getTotalkeranjang();
+        $data['total'] = $harga['total'];
+        $this->load->view('templates/user_header',$data);
+        $this->load->view('templates/user_navbar');
+        $this->load->view('user/shopeall', $data);
         $this->load->view('templates/user_footer');
     }
 
@@ -64,10 +77,15 @@ class User extends CI_Controller
         $id = $this->input->post('id');
         $harga = $this->input->post('harga');
         $quantity = $this->input->post('qty');
-        $total = $harga * $quantity;
-        print_r($total);
-        $where = array('id' => $id); 
-        $this->usermodel->deleteKeranjang($where,'keranjang');
+        $result =  array();
+        foreach ($id as $key => $val) {
+            $result[] =  array(
+                'id' => $id[$key],
+                'quantity' => $quantity[$key],
+                'total' => $harga[$key]*$quantity[$key]
+            );
+        }
+        $this->usermodel->editKeranjang('keranjang', $result, 'id');
         redirect('user/#cart');
     }
 

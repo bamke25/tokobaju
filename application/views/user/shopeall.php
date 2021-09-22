@@ -1,4 +1,6 @@
-<div class="jumbotron"></div>
+<div class="katalogtitle">
+        <h1>SHOPE ALL</h1>
+    </div>
 
     <div class="katalog">
     <?php

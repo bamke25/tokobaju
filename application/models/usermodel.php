@@ -2,8 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usermodel extends CI_Model{
-    public function getProduk(){
-        $data = $this->db->query("SELECT * FROM produk");
+    public function getProduk($val){
+        if ($val > 0) {
+            $data = $this->db->query("SELECT * FROM produk limit 0,6");
+        } else {
+            $data = $this->db->query("SELECT * FROM produk");
+        }
         return $data->result_array();
     }
     public function getSearchProduk($nama){
@@ -49,9 +53,8 @@ class Usermodel extends CI_Model{
         $this->db->where($id);
         $this->db->delete($table);
     }
-    public function editKeranjang(){
-        $this->db->where($id);
-        $this->db->delete($table);
+    public function editKeranjang($table,$data,$id){
+        $this->db->update_batch($table,$data,$id);
     }
 
 }
