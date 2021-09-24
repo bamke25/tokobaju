@@ -7,8 +7,8 @@
             <img src="<?= base_url('assets/img/close.png') ?>" alt="">
         </label>
         <ul>
-            <li><a href="index.php">home</a></li>
-            <li><a href="shopeall.php">shope all</a></li>
+            <li><a href="<?= base_url('user');?>">home</a></li>
+            <li><a href="<?= base_url('user/shopeall');?>">shope all</a></li>
             <li><a href="#history">history</a></li>
             <li><a href="#serach"><img src="<?= base_url('assets/img/search.png') ?>" alt=""></a></li>
 
