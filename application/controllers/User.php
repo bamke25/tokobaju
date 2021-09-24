@@ -165,6 +165,13 @@ class User extends CI_Controller
         }
     }
 
+    public function logout(){
+        $this->session->sess_destroy();
+        echo 'alert("Sukses! Anda berhasil logout."); window.location.href="'.base_url('index.php/').'";';
+        redirect('index.php');
+
+    }
+
     public function register(){
         //load libraries and a model.
         $this->load->library('form_validation');
