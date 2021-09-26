@@ -170,9 +170,10 @@ class User extends CI_Controller
 
             if ($login == FALSE) {
                  echo '<script>alert("Username yang Anda masukan salah.");window.location.href="'.base_url('index.php').'";</script>';
+                 redirect('index.php', 'refresh');
             } else {
                 if (password_verify($pass, $login->password)) {
-                //if the username and password is a math
+                //if the username and password is matched
                     $this->session->set_userdata('name', $login->name);
 
                     redirect('index.php');
@@ -184,6 +185,7 @@ class User extends CI_Controller
     }
 
     public function logout(){
+        // unset current session then redirect to home page
         $this->session->sess_destroy();
         echo 'alert("Sukses! Anda berhasil logout."); window.location.href="'.base_url('index.php/').'";';
         redirect('index.php');
