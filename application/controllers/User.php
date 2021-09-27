@@ -6,6 +6,8 @@ class User extends CI_Controller
     function __construct(){
         parent::__construct();
         $this->load->model('usermodel');
+        $this->load->model('ModelOrders');
+        $this->load->model('ModelAdmin');
     }
     public function index()
     {
@@ -93,8 +95,10 @@ class User extends CI_Controller
     public function admin()
     {
         $data['title'] = 'My Profile';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
+        $id = $this->uri->segment(3);
+		$data['record'] = $this->ModelOrders->orders_report($id);
+		$data['rows'] = $this->ModelAdmin->profile_konsumen($id)->row_array();
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/profile/profile', $data);

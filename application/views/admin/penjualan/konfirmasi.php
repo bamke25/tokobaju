@@ -25,15 +25,15 @@
                         <?php
                         $no = 1;
                         foreach ($record->result_array() as $row) {
-                            if ($row['proses'] == '0') {
-                                $proses = '<i class="text-danger">Pending</i>';
-                            } elseif ($row['proses'] == '1') {
-                                $proses = '<i class="text-warning">Proses</i>';
-                            } elseif ($row['proses'] == '2') {
-                                $proses = '<i class="text-info">Konfirmasi</i>';
-                            } else {
-                                $proses = '<i class="text-success">Packing </i>';
-                            }
+                            // if ($row['proses'] == '0') {
+                            //     $proses = '<i class="text-danger">Pending</i>';
+                            // } elseif ($row['proses'] == '1') {
+                            //     $proses = '<i class="text-warning">Proses</i>';
+                            // } elseif ($row['proses'] == '2') {
+                            //     $proses = '<i class="text-info">Konfirmasi</i>';
+                            // } else {
+                            //     $proses = '<i class="text-success">Packing </i>';
+                            // }
                             echo "<tr><td>$no</td>
                                             <td>#</td>
                                             <td style='color:red;'>$row[total_transfer]</td>

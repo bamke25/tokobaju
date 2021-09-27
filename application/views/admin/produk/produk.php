@@ -10,6 +10,7 @@
         <div class="card-header py-3">
             <?= $this->session->flashdata('message'); ?>
             <a href="<?= base_url('admin/tambah_produk'); ?>" class="btn btn-primary btn-sm">Tambah Data</a>
+            <a style="float: right;" data-toggle="modal" data-target="#importModal" class="btn btn-primary btn-sm">Import Data</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -40,7 +41,7 @@
                               <td>$row[berat] Gram</td>
                      
                               <td><center>
-                                <a class='badge badge-success' title='Edit data' href='" . base_url() . "administrator/edit_produk/$row[id_produk]'>edit</a>
+                                <a class='badge badge-success' title='Edit data' href='" . base_url() . "admin/edit_produk/$row[id_produk]'>edit</a>
                                 <a type='button' class='badge badge-danger' title='Hapus data' data-toggle='modal' data-target='#hapusModal'>delete</a>
                               </center></td>
                           </tr>";
@@ -80,6 +81,40 @@
                     <button type="submit" class="btn btn-primary" href="#">Hapus</button>
                 </div>
                 </form>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Modal Import Data-->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModalLabel">Import Data</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form method="POST" action="<?= base_url('import/excel') ?>" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+
+                                <input type="file" class="form-control" name="file" accept=".xls, .xlsx" required>
+                                <div class="mt-1">
+                                    <span class="text-secondary">File yang harus diupload : .xls, xlsx</span>
+                                </div>
+                                <?= form_error('file', '<div class="text-danger">', '</div>') ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="import" href="#">upload</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
