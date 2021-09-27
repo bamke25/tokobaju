@@ -139,7 +139,7 @@ CREATE TABLE `penjualan` (
 
 --
 -- Struktur dari tabel `produk`
---
+--FFAa
 
 CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,

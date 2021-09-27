@@ -148,6 +148,10 @@ class User extends CI_Controller
         }
     }
 
+    public function history(){
+
+    }
+
     public function login(){
         $this->load->library('form_validation');
 
@@ -175,7 +179,6 @@ class User extends CI_Controller
                 if (password_verify($pass, $login->password)) {
                 //if the username and password is matched
                     $this->session->set_userdata('name', $login->name);
-
                     redirect('index.php');
                 } else {
                      echo '<script>alert("Username atau Password yang Anda masukan salah.");window.location.href="'.base_url('index.php').'";</script>';
@@ -189,7 +192,6 @@ class User extends CI_Controller
         $this->session->sess_destroy();
         echo 'alert("Sukses! Anda berhasil logout."); window.location.href="'.base_url('index.php/').'";';
         redirect('index.php');
-
     }
 
     public function register(){
@@ -225,7 +227,7 @@ class User extends CI_Controller
 
             // send hashed password and other input to database
             $insert = $this->Usermodel->register("user", $data);
-            //system prints message in alert command
+            //system prints message such as below
             if($insert) {
                 echo '<script>alert("Sukses! Anda berhasil melakukan register. Silahkan login untuk mengakses data.");window.location.href="'.base_url('index.php').'";</script>';
             }
