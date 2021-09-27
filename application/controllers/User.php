@@ -5,6 +5,7 @@ class User extends CI_Controller
 {
     function __construct(){
         parent::__construct();
+        $this->load->library('session');
         $this->load->model('usermodel');
     }
     public function index()
@@ -13,8 +14,10 @@ class User extends CI_Controller
         $data['produk'] = $this->usermodel->getProduk(1);
         $data['keranjang'] = $this->usermodel->getKeranjang();
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
+        $data['provinsi'] = $this->usermodel->getProvinsi();
         $harga = $this->usermodel->getTotalkeranjang();
         $data['total'] = $harga['total'];
+        $data['name'] = $this->session->userdata('name');
         $this->load->view('templates/user_header',$data);
         $this->load->view('templates/user_navbar');
         $this->load->view('user/index', $data);
@@ -23,6 +26,7 @@ class User extends CI_Controller
     public function shopeall()
     {
         $this->load->model('usermodel');
+        $data['name'] = $this->session->userdata('name');
         $data['produk'] = $this->usermodel->getProduk(0);
         $data['keranjang'] = $this->usermodel->getKeranjang();
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
@@ -87,6 +91,20 @@ class User extends CI_Controller
         }
         $this->usermodel->editKeranjang('keranjang', $result, 'id');
         redirect('user/#cart');
+    }
+    public function get_kota(){
+        $this->load->model('usermodel');
+        $id_provinsi = $this->input->post('id_provinsi');
+        $kota = $this->usermodel->get_city($id_provinsi);
+ 
+        // Buat variabel untuk menampung tag-tag option nya
+        // Set defaultnya dengan tag option Pilih
+        $lists = "<option value=''>Kota atau Kabupaten</option>";
+        foreach($kota as $data){
+            $lists .= "<option value='".$data->id."'>".$data->name."</option>"; // Tambahkan tag option ke variabel $lists
+        }
+        $callback = array('get_city'=>$lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+        echo json_encode($callback);
     }
 
 

@@ -247,6 +247,7 @@
 
 <div id="tujuan">
         <div class="navinfo" id="navinfo">
+            
             <div class="info">
                 alamat tujuan
             </div>
@@ -254,41 +255,48 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="" class="contentinfo">
+        <form action="<?=base_url('user/insert_history')?>" method="post" class="contentinfo">
             <div class="boxform">
                     <div class="form">
                         <label for="name">nama</label>
-                        <input type="text" name="name" id="name" placeholder="masukan nama anda">
+                        <input type="text" disabled value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
                     </div>
                     <div class="form">
                         <label for="tlp">No telepon</label>
-                        <input type="text" tlp="tlp" id="tlp" placeholder="masukan no telepon">
+                        <input type="text" tlp="tlp" id="tlp" name="no_tlp" placeholder="masukan no telepon">
                     </div>
                     <div class="form">
-                        <label for="profinsi">profinsi</label>
-                        <input type="text" name="profinsi" id="profinsi" placeholder="masukan profinsi anda">
+                        <label for="profinsi">profinsi</label> <br>
+                        <select name="provinsi" id="provinsi">
+                            <option value="">Silahkan dipilih</option>
+                            <?php 
+                                foreach ($provinsi as $val) {
+                                    echo "<option value='".$val['id']."'>".$val['name']."</option>";
+                                }
+                             ?>
+                        </select>
                     </div>
                     <div class="form">
-                        <label for="kota">Kota</label>
-                        <input type="text" name="Kota" id="Kota" placeholder="masukan kota anda">
-                    </div>
-                    <div class="form">
-                        <label for="kecematan">kecematan</label>
-                        <input type="text" name="kecematan" id="kecematan" placeholder="masukan kecematan anda">
-                    </div>
-                    <div class="form">
-                        <label for="kelurahan">kelurahan</label>
-                        <input type="text" name="kelurahan" id="kelurahan" placeholder="masukan kelurahan anda">
+                        <label for="kota">Kota</label><br>
+                        <select name="kota" id="kota">
+                            <option value="">Kota Atau Kabupaten</option>
+                        </select>
                     </div>
                     <div class="form">
                         <label for="alamat">alamat</label>
-                        <input type="text" name="alamat" id="alamat" placeholder="masukan alamat anda">
+                        <textarea name="alamat" id="alamat" cols="38" rows="5"></textarea>
+                    </div>
+                    <div class="form notif">
+                        <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
+                            BERHASIL 
+                        </div>
                     </div>
                     <div class="form">
                         <button type="submit">save</button>
                         <button type="submit">edit</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
+                    
             </div>
         </form>
 </div>
