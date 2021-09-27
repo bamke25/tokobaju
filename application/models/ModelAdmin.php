@@ -6,6 +6,10 @@ class ModelAdmin extends CI_model
         return $this->db->get('user')->result_array();
     }
 
+    function profile_konsumen($id){
+        return $this->db->query("SELECT a.id, a.username, a.name, a.email, a.jenis_kelamin, a.tempat_lahir, a.alamat_lengkap, a.no_hp, a.date_created, a.image, b.kota_id, b.nama_kota as kota FROM `user` a LEFT JOIN kota b ON a.kota_id=b.kota_id where a.id='$id'");
+    }
+
     public function edit_member($table, $data)
     {
         return $this->db->get_where($table, $data);

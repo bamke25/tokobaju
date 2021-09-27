@@ -93,6 +93,12 @@
                     <span>Konfirmasi Bayar</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('admin/orders/'); ?>">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Orders</span></a>
+            </li>
+
 
 
             <!-- Divider -->
