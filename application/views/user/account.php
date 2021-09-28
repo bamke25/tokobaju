@@ -6,7 +6,7 @@
             <div class="boxform">
                 <div class="form">
                     <label for="name">nama</label>
-                    <input type="text" name="name" id="name" placeholder="masukan nama anda">
+                    <input type="text" name="name" id="name" placeholder="masukan nama anda" value="<?php echo $this->session->userdata('name'); ?>" disabled>
                 </div>
                 <div class="form">
                     <label for="tlp">No telepon</label>
