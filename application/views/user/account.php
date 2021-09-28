@@ -21,14 +21,6 @@
                     <input type="text" name="Kota" id="Kota" placeholder="masukan kota anda">
                 </div>
                 <div class="form">
-                    <label for="kecematan">kecematan</label>
-                    <input type="text" name="kecematan" id="kecematan" placeholder="masukan kecematan anda">
-                </div>
-                <div class="form">
-                    <label for="kelurahan">kelurahan</label>
-                    <input type="text" name="kelurahan" id="kelurahan" placeholder="masukan kelurahan anda">
-                </div>
-                <div class="form">
                     <label for="alamat">alamat</label>
                     <input type="text" name="alamat" id="alamat" placeholder="masukan alamat anda">
                 </div>

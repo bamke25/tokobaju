@@ -10,6 +10,7 @@ class User extends CI_Controller
         $this->load->model('ModelOrders');
         $this->load->model('ModelAdmin');
     }
+
     public function index()
     {
         $this->load->model('usermodel');
@@ -111,9 +112,17 @@ class User extends CI_Controller
 
     public function account(){
         $this->load->model('Usermodel');
-        $this->load->view('templates/user_header');
-        $this->load->view('templates/user_navbar');
+
+        $data['name'] = $this->session->userdata('name');
+        $data['produk'] = $this->usermodel->getProduk(0);
+        $data['keranjang'] = $this->usermodel->getKeranjang();
+        $data['jumlah'] = $this->usermodel->getTolkeranjang();
+        $harga = $this->usermodel->getTotalkeranjang();
+        $data['total'] = $harga['total'];
+
+        $this->load->view('templates/user_navbar', $data);
         $this->load->view('user/account');
+        $this->load->view('templates/user_header',$data);
     }
 
 
