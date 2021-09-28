@@ -24,7 +24,7 @@ class Mylibrary{
 	}
 	
 	function kdauto($tabel, $inisial, $conn) {
-		$conn = mysqli_connect("localhost", "root", "", "toko_online_web");
+		$conn = mysqli_connect("localhost", "root", "", "toko_baju");
 		$struktur = mysqli_query($conn, "SELECT * FROM $tabel");
 		$field = mysqli_field_name($struktur,0);
 		$panjang = mysqli_field_len($struktur,0);

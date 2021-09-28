@@ -19,4 +19,8 @@ class ModelOrders extends CI_model
     function orders_report($id){
         return $this->db->query("SELECT * FROM `penjualan` a where a.id_pembeli='$id' ORDER BY a.id_penjualan DESC");
     }
+
+    function orders_report_home($limit){
+        return $this->db->query("SELECT * FROM `penjualan` a ORDER BY a.id_penjualan DESC LIMIT $limit");
+    }
 }

@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->helper('cek_helper');
         $this->load->model('ModelAdmin');
         $this->load->model('ModelRekening');
         $this->load->model('ModelProduk');
@@ -134,7 +135,7 @@ class Admin extends CI_Controller
         $data['title'] = 'Dashboard';
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/index', $data);
+        $this->load->view('admin/dashboard/index', $data);
         $this->load->view('templates/footer');
     }
 
