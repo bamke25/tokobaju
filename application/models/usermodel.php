@@ -47,7 +47,7 @@ class Usermodel extends CI_Model{
      	return $this->db->get('keranjang')->result_array();
     }
     public function getProvinsi(){
-        $data = $this->db->get("tbl_provinsi");
+        $data = $this->db->get("provinsi");
         return $data->result_array();
     }
     public function insertKeranjang($data,$table){

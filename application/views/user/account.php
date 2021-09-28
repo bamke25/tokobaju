@@ -2,7 +2,7 @@
         <h1>MY ACCOUNT</h1>
     </div>
     <div class="katalog">
-        <form action="" class="account">
+        <form action="" class="account" method="POST">
             <div class="boxform">
                 <div class="form">
                     <label for="name">nama</label>
@@ -13,8 +13,8 @@
                     <input type="text" tlp="tlp" id="tlp" placeholder="masukan no telepon">
                 </div>
                 <div class="form">
-                    <label for="profinsi">profinsi</label>
-                    <input type="text" name="profinsi" id="profinsi" placeholder="masukan profinsi anda">
+                    <label for="profinsi">provinsi</label>
+                    <input type="text" name="provinsi" id="profinsi" placeholder="masukan provinsi anda">
                 </div>
                 <div class="form">
                     <label for="kota">Kota</label>

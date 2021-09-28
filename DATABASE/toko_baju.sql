@@ -26,6 +26,9 @@ SET time_zone = "+00:00";
 --
 -- Struktur dari tabel `detail_pembelian`
 --
+CREATE Database toko_baju;
+
+use toko_baju;
 
 CREATE TABLE `detail_pembelian` (
   `id_pembelian_detail` int(11) NOT NULL,
@@ -811,6 +814,40 @@ INSERT INTO `user` (`id`, `name`, `email`, `username`, `jenis_kelamin`, `tempat_
 (3, 'Member', 'member@gmail.com', '', 'Laki-laki', '', '', 0, '', 'default.jpg', '$2y$10$dpLGATIOqhpsawwatpcrceStcIC9w5Vrl.GR6DdpdQDyIKZHFXmw2', 2, 1, 1631069194);
 
 -- --------------------------------------------------------
+
+CREATE TABLE `keranjang` (
+  `id` int(3) NOT NULL,
+  `id_produk` int(3) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `total` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id`, `id_produk`, `quantity`, `total`) VALUES
+(1, 11, 1, 200000);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Struktur dari tabel `user_role`

@@ -68,8 +68,6 @@ class User extends CI_Controller
 
         $this->usermodel->insertKeranjang($data,'keranjang');
         redirect('user/#cart');
-
-
     }
      public function delete_cart($id)
     {
@@ -113,6 +111,7 @@ class User extends CI_Controller
     public function account(){
         $this->load->model('Usermodel');
 
+        //these lines load the 
         $data['name'] = $this->session->userdata('name');
         $data['produk'] = $this->usermodel->getProduk(0);
         $data['keranjang'] = $this->usermodel->getKeranjang();
