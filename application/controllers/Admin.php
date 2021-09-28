@@ -470,14 +470,55 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function tracking()
+    {
+        if ($this->uri->segment(3) != '') {
+            $kode_transaksi = filter($this->uri->segment(3));
+            $data['title'] = 'Tracking Order ' . $kode_transaksi;
+            $data['rows'] = $this->db->query("SELECT * FROM penjualan a JOIN user b ON a.id_pembeli=b.id JOIN kota c ON b.kota_id=c.kota_id where a.kode_transaksi='$kode_transaksi'")->row_array();
+            $data['record'] = $this->db->query("SELECT a.kode_transaksi, b.*, c.nama_produk, c.satuan, c.berat, c.diskon FROM `penjualan` a JOIN detail_penjualan b ON a.id_penjualan=b.id_penjualan JOIN produk c ON b.id_produk=c.id_produk where a.kode_transaksi='" . $kode_transaksi . "'");
+            $data['total'] = $this->db->query("SELECT a.resi, a.id_penjualan, a.kode_transaksi, a.kurir, a.service, a.proses, a.ongkir, sum((b.harga_jual*b.jumlah)-(c.diskon*b.jumlah)) as total, sum(c.berat*b.jumlah) as total_berat FROM `penjualan` a JOIN detail_penjualan b ON a.id_penjualan=b.id_penjualan JOIN produk c ON b.id_produk=c.id_produk where a.kode_transaksi='" . $kode_transaksi . "'")->row_array();
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/penjualan/detail_konfirmasi', $data);
+            $this->load->view('templates/footer');
+        }
+
+        if (isset($_POST['submit'])) {
+            $data = array('resi' => $this->input->post('resi'));
+            $where = array('id_penjualan' => $this->uri->segment('4'));
+            $this->model_app->update('rb_penjualan', $data, $where);
+            redirect('administrator/tracking/' . $this->uri->segment('3'));
+        }
+    }
+
 
 
 
     // Controller Orders
     public function orders()
     {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Laporan Pesanan Masuk';
         $data['record'] = $this->ModelOrders->orders_report_all();
-        $this->template->load('administrator/template', 'administrator/mod_penjualan/view_orders_report', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/penjualan/orders', $data);
+        $this->load->view('templates/footer');
+    }
+    public function orders_status()
+    {
+        $data = array('proses' => $this->uri->segment(4));
+        $where = array('id_penjualan' => $this->uri->segment(3));
+        $this->ModelOrders->update('penjualan', $data, $where);
+        redirect('admin/orders');
+    }
+
+    public function print_orders()
+    {
+        $data['title'] = 'Laporan Pesanan Masuk';
+        $data['record'] = $this->ModelOrders->orders_report_all();
+        $this->load->view('admin/penjualan/orders_print', $data);
     }
 }

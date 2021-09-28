@@ -1,3 +1,4 @@
+
 <div class="jumbotron"></div>
 
     <div class="katalog">
@@ -20,25 +21,10 @@
     } ?>
     </div>
 
+
     <div class="shope">    
         <a class="shopenow" href="">shope now</a>
     </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('.btnfo').click(function(){
-        var id,keterangan,imageproduk, namaproduk, hargaproduk,id_produk;
-        id = $(this).children().html();
-        keterangan = $('#ket'+id).val();
-        id_produk = $('#id_prod'+id).val();
-        imageproduk = $('#imgprod'+id).attr("src");
-        namaproduk = $('#namaprod'+id).text();
-        hargaproduk = $('#hargapro'+id).text();
-        $("#img_card").attr("src", imageproduk);
-        $("#judul_card").text(namaproduk);
-        $("#harga_card").text(hargaproduk);
-        $("#deskripsi_card").text(keterangan)
-        $("#id_produk").val(id_produk);
-      });   
-    });
-</script>
+        
+
     
