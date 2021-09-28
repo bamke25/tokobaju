@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Sep 2021 pada 08.39
+-- Waktu pembuatan: 28 Sep 2021 pada 12.59
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -26,9 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Struktur dari tabel `detail_pembelian`
 --
-CREATE Database toko_baju;
-
-use toko_baju;
 
 CREATE TABLE `detail_pembelian` (
   `id_pembelian_detail` int(11) NOT NULL,
@@ -667,7 +664,7 @@ CREATE TABLE `penjualan` (
   `service` varchar(256) NOT NULL,
   `ongkir` int(11) NOT NULL,
   `resi` varchar(256) NOT NULL,
-  `waktu_transaksi` datetime NOT NULL,
+  `waktu_transaksi` date NOT NULL,
   `proses` enum('0','1','2','3','4') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -676,7 +673,7 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`id_penjualan`, `kode_transaksi`, `id_pembeli`, `kurir`, `service`, `ongkir`, `resi`, `waktu_transaksi`, `proses`) VALUES
-(1, 'TRX-123', 3, 'JNE', 'Premium', 2000, 'R75q8gsahk', '2021-09-22 08:19:15', '3');
+(1, 'TRX-123', 3, 'JNE', 'Premium', 2000, 'R75q8gsahk', '2021-09-28', '2');
 
 -- --------------------------------------------------------
 
@@ -814,40 +811,6 @@ INSERT INTO `user` (`id`, `name`, `email`, `username`, `jenis_kelamin`, `tempat_
 (3, 'Member', 'member@gmail.com', '', 'Laki-laki', '', '', 0, '', 'default.jpg', '$2y$10$dpLGATIOqhpsawwatpcrceStcIC9w5Vrl.GR6DdpdQDyIKZHFXmw2', 2, 1, 1631069194);
 
 -- --------------------------------------------------------
-
-CREATE TABLE `keranjang` (
-  `id` int(3) NOT NULL,
-  `id_produk` int(3) NOT NULL,
-  `quantity` int(3) NOT NULL,
-  `total` int(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`id`, `id_produk`, `quantity`, `total`) VALUES
-(1, 11, 1, 200000);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `keranjang`
---
-ALTER TABLE `keranjang`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `keranjang`
---
-ALTER TABLE `keranjang`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Struktur dari tabel `user_role`
