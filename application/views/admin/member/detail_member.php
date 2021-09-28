@@ -22,7 +22,7 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab"> <br>
             <div class='col-md-6'>
-              <table class='table table-condensed table-bordered'>
+              <table style="background-color:rgba(0, 0, 0, 0);" class='table table-condensed '>
                 <tbody>
                   <tr bgcolor='#e3e3e3'>
                     <th rowspan='14' width='110px'>

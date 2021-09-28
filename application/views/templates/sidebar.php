@@ -65,37 +65,37 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/produk'); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fab fa-fw fa-buromobelexperte"></i>
                     <span>Produk</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/kategori_produk'); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa fa-fw fa-th-list"></i>
                     <span>Kategori Produk</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/rekening/'); ?>">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-credit-card"></i>
                     <span>Rekening</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/tambah_stok_barang/'); ?>">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-shopping-basket"></i>
                     <span>Stok Barang</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/konfirmasi/'); ?>">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-handshake"></i>
                     <span>Konfirmasi Bayar</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/orders/'); ?>">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Orders</span></a>
             </li>
 
@@ -112,7 +112,7 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/member'); ?>">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-user-friends"></i>
                     <span>Member</span></a>
             </li>
 

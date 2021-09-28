@@ -47,7 +47,7 @@
                                     <td>" . cek_terakhir($row['waktu_transaksi']) . " lalu</td>
                                     <td>
                                     <a class='badge badge-info' title='Detail data pesanan' href='" . base_url() . "admin/tracking/$row[kode_transaksi]'><span class='glyphicon glyphicon-search'></span>detail</a>
-                                    <a class='badge badge-danger ' title='Delete Data' href='" . base_url() . "admin/delete_transaksi/$row[id_penjualan]' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span>delete</a>
+                                    
                                     </td>
                                      
                         </tr>";
