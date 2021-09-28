@@ -653,7 +653,7 @@ footer .copyright a{
     margin: auto;
     margin-bottom: 40px;
 }
-.boxform .form label, .boxform .form input, .boxform .form select{
+.boxform .form label, .boxform .form input, .boxform .form select, .select{
     width: 100%;
     box-sizing: border-box;
     outline: none;
@@ -666,8 +666,7 @@ footer .copyright a{
 .boxform .form img{
     width: 29px;
 }
-.boxform .form input, .boxform .form select{
-    display: block;
+.boxform .form input, .boxform .form select, .select{
     border: none;
     border-bottom: 1px solid black;
     margin-top: 20px;
