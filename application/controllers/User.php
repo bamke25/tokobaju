@@ -110,6 +110,7 @@ class User extends CI_Controller
     }
 
     public function account(){
+        
         $this->load->view('templates/user_header');
         $this->load->view('templates/user_navbar');
         $this->load->view('user/account');

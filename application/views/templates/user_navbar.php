@@ -15,7 +15,7 @@
 
             <?php
             // check if user is logged in or not
-            if ($this->session->userdata('logged_in') == FALSE ){?>
+            if ($this->session->userdata('name') != null ){?>
             <li><a href="#login"><img src="<?php echo base_url('assets/img/user.png')?>" alt="">
 
                 <li><a href="#"><img src="<?=base_url('assets/img/user.png')?>" alt="">
