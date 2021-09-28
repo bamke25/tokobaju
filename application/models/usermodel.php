@@ -53,6 +53,9 @@ class Usermodel extends CI_Model{
     public function insertKeranjang($data,$table){
         $this->db->insert($table,$data);
     }
+    public function insert_history($table,$data){
+        $this->db->insert($table,$data);
+    }
     public function deleteKeranjang($id,$table){
         $this->db->where($id);
         $this->db->delete($table);

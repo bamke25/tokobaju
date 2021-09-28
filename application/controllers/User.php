@@ -102,7 +102,7 @@ class User extends CI_Controller
         // Set defaultnya dengan tag option Pilih
         $lists = "<option value=''>Kota atau Kabupaten</option>";
         foreach($kota as $data){
-            $lists .= "<option value='".$data->id."'>".$data->name."</option>"; // Tambahkan tag option ke variabel $lists
+            $lists .= "<option value='".$data->id.".".$data->name."'>".$data->name."</option>"; // Tambahkan tag option ke variabel $lists
         }
         $callback = array('get_city'=>$lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
         echo json_encode($callback);
@@ -187,6 +187,25 @@ class User extends CI_Controller
 
     public function history(){
 
+    }
+    public function insert_history(){
+        $nama = $this->input->post('nama');
+        $no = $this->input->post('no_tlp');
+        $provinsi = $this->input->post('provinsi');
+        $kota = $this->input->post('kota');
+        $alamat = $this->input->post('alamat');
+        $data = array(
+                        'nama' => $nama,
+                        'alamat'  => $alamat,
+                        'provinsi' => $provinsi,
+                        'kota' => $kota,
+                        'no_telepon' => $no
+        );
+        $insert = $this->usermodel->insert_history("tbl_alamat",$data);
+        // Buat variabel untuk menampung tag-tag option nya
+        // Set defaultnya dengan tag option Pilih
+        
+ //
     }
 
     public function login(){

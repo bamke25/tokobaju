@@ -39,10 +39,11 @@
       });   
       $("#provinsi").change(function(){ // Ketika user mengganti atau memilih data provinsi
     $(".notif").show("easing");
+                var hasil = $("#provinsi").val().split(".");
                 $.ajax({
                     type: "POST", // Method pengiriman data bisa dengan GET atau POST
                     url: "<?php echo base_url("user/get_kota"); ?>", // Isi dengan url/path file php yang dituju
-                    data: {id_provinsi : $("#provinsi").val()}, // data yang akan dikirim ke file yang dituju
+                    data: {id_provinsi : hasil[0]}, // data yang akan dikirim ke file yang dituju
                     dataType: "json",
                     beforeSend: function(e) {
                         if(e && e.overrideMimeType) {
@@ -55,6 +56,49 @@
                         // set isi dari combobox kota
                         // lalu munculkan kembali combobox kotanya
                         $("#kota").html(response.get_city).show();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+                    }
+                });
+            });
+
+      $("#save").click(function(){ // Ketika user mengganti atau memilih data provinsi
+ 
+                $.ajax({
+                    type: "POST", // Method pengiriman data bisa dengan GET atau POST
+                    url: "<?php echo base_url("user/insert_history"); ?>", // Isi dengan url/path file php yang dituju
+                    data: {
+                            nama : $("#name").val(),
+                            no_tlp : $("#tlp").val(),
+                            provinsi   : $("#provinsi").val(),
+                            kota          : $("#kota").val(),
+                            alamat          : $("#alamat").val()
+                            }, // data yang akan dikirim ke file yang dituju
+                    dataType: "json",
+                    beforeSend: function(e) {
+                        if(e && e.overrideMimeType) {
+                                e.overrideMimeType("application/json;charset=UTF-8");
+                        }
+                    },
+                    success: function(response){ // Ketika proses pengiriman berhasil
+                      // Sembunyikan loadingnya
+                       // var alamat = $("#alamat").val();
+                       // var nama_type = $("#nama_type").val();
+                       // var provinsi = $("#provinsi option:selected").text();
+                       // var kabupaten = $("#kabupaten option:selected").text();
+                       // var kecamatan = $("#kecamatan option:selected").text();
+                       // var desa = $("#desa option:selected").text();
+                       // $(".alamat_lengkap_sekali")[0].innerHTML = alamat + " ";
+                       // $(".alamat_lengkap_sekali")[1].innerHTML = nama_type + " ";
+                       // $(".alamat_lengkap_sekali")[2].innerHTML = desa + " ";
+                       // $(".alamat_lengkap_sekali")[3].innerHTML = kecamatan + " ";
+                       // $(".alamat_lengkap_sekali")[4].innerHTML = kabupaten + " ";
+                       // $(".alamat_lengkap_sekali")[5].innerHTML = provinsi;
+                       //  $("#pesan").show("slow");
+                       //  setTimeout(function(){ $("#pesan").hide("slow"); }, 3000);
+                        // set isi dari combobox kota
+                        // lalu munculkan kembali combobox kotanya
                     },
                     error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
                         alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error

@@ -257,7 +257,7 @@
             <div class="boxform">
                     <div class="form">
                         <label for="name">nama</label>
-                        <input type="text" disabled value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
+                        <input type="text"  value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
                     </div>
                     <div class="form">
                         <label for="tlp">No telepon</label>
@@ -269,7 +269,7 @@
                             <option value="">Silahkan dipilih</option>
                             <?php 
                                 foreach ($provinsi as $val) {
-                                    echo "<option value='".$val['id']."'>".$val['name']."</option>";
+                                    echo "<option value='".$val['id'].".".$val['name']."'>".$val['name']."</option>";
                                 }
                              ?>
                         </select>
@@ -290,8 +290,8 @@
                         </div>
                     </div>
                     <div class="form">
-                        <button type="submit">save</button>
-                        <button type="submit">edit</button>
+                        <button id="save" type="submit">save</button>
+                        <button id="edit" type="submit">edit</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
                     
