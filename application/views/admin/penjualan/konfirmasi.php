@@ -35,8 +35,8 @@
                             //     $proses = '<i class="text-success">Packing </i>';
                             // }
                             echo "<tr><td>$no</td>
-                                            <td>#</td>
-                                            <td style='color:red;'>$row[total_transfer]</td>
+                                            <td>$row[kode_transaksi]</td>
+                                            <td style='color:red;'>Rp ".rupiah($row['total_transfer'])."</td>
                                             <td>$row[nama_pengirim]</td>
                                             <td>$row[nama_bank]</td>
                                             <td>$row[tanggal_transfer]</td>

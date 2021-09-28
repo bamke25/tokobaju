@@ -60,20 +60,20 @@
 
                             echo "<tr><td>$no</td>
                                             <td>$row[kode_transaksi]</td>
-                                            <td style='color:red;'>Rp $total[total]+$total[ongkir]+ ".substr($this->uri->segment(3),-3)."</td>
-                                            <td><span style='text-transform:uppercase'>$total[kurir]</span> ($total[service])</td>
+                                            <td style='color:red;'>Rp ".rupiah($total['total']+$total['ongkir'] )."</td>
+                                            <td><span style='text-transform:uppercase'>$total[kurir]</span> $total[service]</td>
                                             <td><a target='_BLANK' title='$total[nama_provinsi] -> $total[nama_kota]' href='https://www.google.com/maps/place/$total[nama_kota]'>$total[nama_kota]</a></td>
                                             <td>$row[waktu_transaksi]</td>
                                             <td width='150px'>
                                               <div class='btn-group'> 
                                                 <button style='width:70px' type='button' class='badge badge-$color'>$text</button> 
-                                                <button type='button' class='badge badge-$color dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <span class='caret'></span> <span class='sr-only'>Toggle Dropdown</span> </button> 
-                                                  <ul class='dropdown-menu' style='border:1px solid #cecece;'> 
-                                                    <li><a href='" . base_url() . "admin/orders_status/$row[id_penjualan]/0' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Pending ?')\"> Pending</a></li> 
-                                                    <li><a href='" . base_url() . "admin/orders_status/$row[id_penjualan]/1' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Packing ?')\"> Packing</a></li> 
-                                                    <li><a href='" . base_url() . "admin/orders_status/$row[id_penjualan]/2' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Konfirmasi ?')\"> Konfirmasi</a></li> 
-                                                    <li><a href='" . base_url() . "admin/orders_status/$row[id_penjualan]/3' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Dikirim ?')\"> Dikirim</a></li> 
-                                                    <li><a href='" . base_url() . "admin/orders_status/$row[id_penjualan]/4' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Diterima ?')\"> Diterima</a></li> 
+                                                <button type='button' id='item' role='button' class='badge badge-$color dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>   </button> 
+                                                  <ul class='dropdown-menu' aria-labelledby='item'> 
+                                                    <li><a class='dropdown-item' href='" . base_url() . "admin/orders_status/$row[id_penjualan]/0' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Pending ?')\"> Pending</a></li> 
+                                                    <li><a class='dropdown-item' href='" . base_url() . "admin/orders_status/$row[id_penjualan]/1' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Packing ?')\"> Packing</a></li> 
+                                                    <li><a class='dropdown-item' href='" . base_url() . "admin/orders_status/$row[id_penjualan]/2' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Konfirmasi ?')\"> Konfirmasi</a></li> 
+                                                    <li><a class='dropdown-item' href='" . base_url() . "admin/orders_status/$row[id_penjualan]/3' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Dikirim ?')\"> Dikirim</a></li> 
+                                                    <li><a class='dropdown-item' href='" . base_url() . "admin/orders_status/$row[id_penjualan]/4' onclick=\"return confirm('Apa anda yakin untuk ubah status jadi Diterima ?')\"> Diterima</a></li> 
                                                   </ul> 
                                               </div>
                                             <a class='badge badge-info' title='Detail data pesanan' href='" . base_url() . "admin/tracking/$row[kode_transaksi]'><span class='glyphicon glyphicon-search'></span>detail</a>

@@ -2,7 +2,7 @@
     <div class='box box-info'>
         <div class='box-header with-border'>
             <h3 class='box-title'><?php echo $title; ?></h3>
-            <a class='pull-right btn btn-warning btn-sm' href='<?php echo base_url(); ?>administrator/orders'>Kembali</a>
+            <a class='btn btn-warning btn-sm' href='<?php echo base_url(); ?>administrator/orders'>Kembali</a>
         </div>
         <div class='box-body'>
             <div class='col-md-12'>
@@ -16,46 +16,47 @@
                 } else {
                     $proses = '<i class="text-success">Packing </i>';
                 }
-                echo "<div class='col-md-7'>
-        <dl class='dl-horizontal'>
-            <dt>Nama</dt>       <dd>$rows[nama_lengkap]</dd>
-            <dt>No Telpon/Hp</dt>       <dd>$rows[no_hp]</dd>
-            <dt>Email</dt>       <dd>$rows[email]</dd>
-            <dt>Kota</dt>               <dd>$rows[nama_kota]</dd>
-            <dt>Alamat Lengkap</dt>     <dd>$rows[alamat_lengkap]</dd>
-        </dl>
-    </div>
+                echo
+                "<div class='col-md-7'>
+                    <dl class='dl-horizontal'>
+                        <dt>Nama</dt>               <dd>$rows[nama_lengkap]</dd>
+                        <dt>No Telpon/Hp</dt>       <dd>$rows[no_hp]</dd>
+                        <dt>Email</dt>              <dd>$rows[email]</dd>
+                        <dt>Kota</dt>               <dd>$rows[nama_kota]</dd>
+                        <dt>Alamat Lengkap</dt>     <dd>$rows[alamat_lengkap]</dd>
+                    </dl>
+                </div>
 
-    <div class='col-md-5'>
-        <center>
-        Total Tagihan 
-        <h4 style='margin:0px;'>$total[total] + $total[ongkir] + " . substr($this->uri->segment(3), -3) . "<br> <br> 
-          <span style='text-transform:uppercase'>$total[kurir]</span> ($total[service])
-        </h4>
-        Status : <i>$proses</i>   
-        <form action='" . base_url() . "administrator/tracking/" . $this->uri->segment(3) . "/$total[id_penjualan]' method='POST'>
-            Input Resi <input type='text' name='resi' class='form-control' value='$total[resi]' style='display:inline-block; color:red; width:60%'>
-            <input style='margin-top:-4px' class='btn btn-primary' type='submit' name='submit' value='Submit'>
-          </form>
-        </center><br>
-    </div>
+                <div class='col-md-5'>
+                    <center>
+                    Total Tagihan 
+                    <h4 style='margin:0px;'>$total[total] + $total[ongkir] + " . substr($this->uri->segment(3), -3) . "<br> <br> 
+                    <span style='text-transform:uppercase'>$total[kurir]</span> ($total[service])
+                    </h4>
+                    Status : <i>$proses</i>   
+                    <form action='" . base_url() . "administrator/tracking/" . $this->uri->segment(3) . "/$total[id_penjualan]' method='POST'>
+                        Input Resi <input type='text' name='resi' class='form-control' value='$total[resi]' style='display:inline-block; color:red; width:60%'>
+                        <input style='margin-top:-4px' class='btn btn-primary' type='submit' name='submit' value='Submit'>
+                    </form>
+                    </center><br>
+                </div>
 
-      <table class='table table-striped table-condensed '>
-          <thead>
-            <tr bgcolor='#e3e3e3'>
-              <th width='30px'>$no</th>
-              <th width='47%'>Nama Produk</th>
-              <th>Harga</th>
-              <th>Qty</th>
-              <th>Berat</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>";
-
+                <table class='table table-striped table-condensed '>
+                    <thead>
+                        <tr bgcolor='#e3e3e3'>
+                        <th width='30px'>$no</th>
+                        <th width='47%'>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Qty</th>
+                        <th>Berat</th>
+                        <th>Total</th>
+                        </tr>
+                    </thead>
+                <tbody>";
                 $no = 1;
                 $diskon_total = 0;
-                foreach ($record->result_array() as $row) {
+                foreach ($record->result_array() as $row) 
+                {
                     $sub_total = (($row['harga_jual'] - $row['diskon']) * $row['jumlah']);
                     if ($row['diskon'] != '0') {
                         $diskon = "<del style='color:red'>$row[harga_jual]</del>";
@@ -68,54 +69,59 @@
                         $foto_produk = $row['gambar'];
                     }
                     $diskon_total = $diskon_total + $row['diskon'] * $row['jumlah'];
-                    echo "<tr><td>$no</td>
-                    <td class='valign'><a href='" . base_url() . "produk/detail/$row[produk_seo]'>$row[nama_produk]</a><br>
-                    <small>Note : $row[keterangan_order]</small></td>
-                    <td class='valign'>$row[harga_jual] - $row[diskon] . $diskon</td>
-                    <td class='valign'>$row[jumlah]</td>
-                    <td class='valign'>" . ($row['berat'] * $row['jumlah']) . " Gram</td>
-                    <td class='valign'>$sub_total</td>
-                </tr>";
+                    echo "
+                            <tr>
+                                <td>$no</td>
+                                <td class='valign'><a href='" . base_url() . "produk/detail/$row[produk_seo]'>$row[nama_produk]</a><br>
+                                <small>Note : $row[keterangan_order]</small></td>
+                                <td class='valign'>$row[harga_jual] - $row[diskon] . $diskon</td>
+                                <td class='valign'>$row[jumlah]</td>
+                                <td class='valign'>" . ($row['berat'] * $row['jumlah']) . " Gram</td>
+                                <td class='valign'>$sub_total</td>
+                            </tr>";
                     $no++;
-                }
+                }   echo "
+                            <tr class='success'>
+                                <td colspan='5'><b>Subtotal </b> <i class='pull-right'>(" . $total['total'] . " Rupiah)</i></td>
+                                <td><b>Rp " . ($total['total']) . "</b></td>
+                            </tr>
 
-                echo "<tr class='success'>
-                  <td colspan='5'><b>Subtotal </b> <i class='pull-right'>(" . $total['total'] . " Rupiah)</i></td>
-                  <td><b>Rp " . ($total['total']) . "</b></td>
-                </tr>
+                            <tr class='success'>
+                                <td colspan='5'><b>Ongkir </b> <i class='pull-right'>(" . ($total['ongkir']) . " Rupiah)</i></td>
+                                <td><b>Rp " . ($total['ongkir']) . "</b></td>
+                            </tr>
 
-                <tr class='success'>
-                  <td colspan='5'><b>Ongkir </b> <i class='pull-right'>(" . ($total['ongkir']) . " Rupiah)</i></td>
-                  <td><b>Rp " . ($total['ongkir']) . "</b></td>
-                </tr>
+                            <tr class='success'>
+                                <td colspan='5'><b>Berat</b> <i class='pull-right'>(" . ($total['total_berat']) . " Gram)</i></td>
+                                <td><b>$total[total_berat] Gram</b></td>
+                            </tr>
 
-                <tr class='success'>
-                  <td colspan='5'><b>Berat</b> <i class='pull-right'>(" . ($total['total_berat']) . " Gram)</i></td>
-                  <td><b>$total[total_berat] Gram</b></td>
-                </tr>
+                    </tbody>
+                    </table><br>";
 
-        </tbody>
-      </table><br>";
-
-                $cek_konfirmasi = $this->model_app->view_where('rb_konfirmasi', array('id_penjualan' => $total['id_penjualan']));
-                if ($cek_konfirmasi->num_rows() >= 1) {
+                $cek_konfirmasi = $this->ModelOrders->view_where('konfirmasi', array('id_penjualan' => $total['id_penjualan']));
+                if ($cek_konfirmasi->num_rows() >= 1) 
+                {
                     echo "<div class='alert alert-success' style='border-radius:0px; padding:5px'>Konfirmasi Pembayaran dari Pembeli : </div>";
                     $konfirmasi = $this->model_app->view_join_where('rb_konfirmasi', 'rb_rekening', 'id_rekening', array('id_penjualan' => $total['id_penjualan']), 'id_konfirmasi_pembayaran', 'DESC');
-                    foreach ($konfirmasi as $r) {
-                        echo "<div class='col-md-8'>
-                  <dl class='dl-horizontal'>
-                      <dt>Nama Pengirim</dt>       <dd>$r[nama_pengirim]</dd>
-                      <dt>Total Transfer</dt>      <dd>$r[total_transfer]</dd>
-                      <dt>Tanggal Transfer</dt>    <dd>$r[tanggal_transfer]</dd>
-                      <dt>Bukti Transfer</dt>      <dd><a href='" . base_url() . "administrator/download_file/$r[bukti_transfer]'>Download File</a></dd>
-                      <dt>Rekening Tujuan</dt>     <dd>$r[nama_bank] - $r[no_rekening] - $r[pemilik_rekening]</dd>
-                      <dt>Waktu Konfirmasi</dt>      <dd>$r[waktu_konfirmasi]</dd>
-                  </dl>
-              </div>";
+                    foreach ($konfirmasi as $r) 
+                    {
+                        echo "
+                        <div class='col-md-8'>
+                            <dl class='dl-horizontal'>
+                                <dt>Nama Pengirim</dt>       <dd>$r[nama_pengirim]</dd>
+                                <dt>Total Transfer</dt>      <dd>$r[total_transfer]</dd>
+                                <dt>Tanggal Transfer</dt>    <dd>$r[tanggal_transfer]</dd>
+                                <dt>Bukti Transfer</dt>      <dd><a href='" . base_url() . "administrator/download_file/$r[bukti_transfer]'>Download File</a></dd>
+                                <dt>Rekening Tujuan</dt>     <dd>$r[nama_bank] - $r[no_rekening] - $r[pemilik_rekening]</dd>
+                                <dt>Waktu Konfirmasi</dt>    <dd>$r[waktu_konfirmasi]</dd>
+                            </dl>
+                        </div>";
                     }
                 }
 
-                echo "</div>
+                echo "
+        </div>
       </div>
     </div>
   </div>";

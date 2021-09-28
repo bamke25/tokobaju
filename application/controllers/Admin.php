@@ -326,6 +326,8 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Member';
         $id = $this->uri->segment(3);
+        $data['record'] = $this->ModelOrders->orders_report($id);
+        $data['rows'] = $this->ModelAdmin->profile_konsumen($id)->row_array();
         $data['detail'] = $this->ModelAdmin->edit_member('user', array('id' => $id))->row_array();
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

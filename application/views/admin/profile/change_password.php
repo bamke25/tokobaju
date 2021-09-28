@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Ubah Password</h1>
+    <h1 class="h4 mb-2 text-gray-800">Ubah Password</h1>
     <p class="mb-4">Menampilkan form ubah password </p>
 
     <!-- Main content -->
@@ -12,7 +12,7 @@
             <?= $this->session->flashdata('message'); ?>
 
             <form action="<?= base_url('user/change_password'); ?>" method="POST">
-                <button type="submit" class="btn btn-secondary btn-md">Update password</button>
+
 
         </div>
         <!-- Main content -->
@@ -35,15 +35,13 @@
                         <input type="password" class="form-control" id="newpassword2" name="newpassword2">
                         <small class="text-danger"><?= form_error('newpassword2') ?></small>
                     </div>
-                    <!-- <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Change Password</button>
-                    </div> -->
-                    </form>
                 </div>
             </div>
-
         </div>
-
+        <div class="card-footer">
+            <button style="float: right;" type="submit" class="btn btn-secondary btn-sm">Update password</button>
+        </div>
+        </form>
         <!-- /.content -->
     </div>
 
