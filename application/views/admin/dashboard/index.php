@@ -85,7 +85,7 @@
 
     <section class="col-lg-12 connectedSortable">
         <?php include "berita_transaksi.php"; ?>
-    </section><!-- right col -->
+    </section>
 
 
 
