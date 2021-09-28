@@ -3,13 +3,13 @@
         <i class="fa fa-pencil"></i>
         <h4 class="box-title">Transaksi Penjualan Terbaru</h4>
         <div class="card-tools" style="float: right;">
-            <button type="button" class="btn btn-tool" data-target="#transaksi" data-toggle="collapse" aria-expanded="true" aria-controls="collapsetransaksi"><i class="fa fa-minus"></i></button>
-            <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+            <!-- <button type="button" class="btn btn-tool" data-target="#transaksi" data-toggle="collapse" aria-expanded="true" aria-controls="collapsetransaksi"><i class="fa fa-minus"></i></button> -->
+            <!-- <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button> -->
         </div>
     </div>
 
-    <!-- id="dataTable" -->
-    <div class="collapse" id="transaksi">
+    <!--  class="collapse" id="transaksi" -->
+    <div  >  
         <div class="card-body">
             <table class='table table-hover table-condensed'>
                 <thead>

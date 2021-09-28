@@ -23,11 +23,10 @@
                     </thead>
                     <tbody>
                         <?php
-                        // if ($user['role_id'] == 2) {
-                            $no = 1;
-                            foreach ($member as $s) {
+                        $no = 1;
+                        foreach ($member as $s) {
+                            if ($user['role_id'] == 1 && $s['role_id'] != 1) {
                                 echo " 
-                       
                             <tr>
                                 <td>$no</td>
                                 <td>$s[name]</td>
@@ -37,11 +36,10 @@
                                     
                                 </td>
                             </tr>
-                        
                             ";
                                 $no++;
                             }
-                        // }   
+                        }
                         ?>
                     </tbody>
                 </table>
