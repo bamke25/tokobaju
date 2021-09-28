@@ -13,8 +13,6 @@
 
 <!-- Bagian Account -->
 
-
-
 <!-- Bagian Cart -->
 
 <div id="cart">

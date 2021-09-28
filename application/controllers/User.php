@@ -89,6 +89,12 @@ class User extends CI_Controller
         redirect('user/#cart');
     }
 
+    public function account(){
+        $this->load->view('templates/user_header');
+        $this->load->view('templates/user_navbar');
+        $this->load->view('user/account');
+    }
+
 
     public function admin()
     {

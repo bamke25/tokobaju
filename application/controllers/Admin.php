@@ -13,8 +13,6 @@ class Admin extends CI_Controller
         $this->load->model('ModelOrders');
     }
 
-
-
     // Login dan Registrasi
     public function index()
     {
