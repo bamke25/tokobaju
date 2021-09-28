@@ -667,6 +667,7 @@ footer .copyright a{
     width: 29px;
 }
 .boxform .form input, .boxform .form select{
+    display: block;
     border: none;
     border-bottom: 1px solid black;
     margin-top: 20px;
