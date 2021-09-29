@@ -65,8 +65,8 @@ class Usermodel extends CI_Model{
     }
     public function get_city($id)
     {
-       $this->db->where('province_id', $id);
-        $result = $this->db->get("tbl_kota")->result(); // Tampilkan semua data kota berdasarkan id provinsi
+       $this->db->where('provinsi_id', $id);
+        $result = $this->db->get("kota")->result(); // Tampilkan semua data kota berdasarkan id provinsi
         return $result; 
     }
 

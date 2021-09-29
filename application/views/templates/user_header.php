@@ -269,7 +269,7 @@
                             <option value="">Silahkan dipilih</option>
                             <?php 
                                 foreach ($provinsi as $val) {
-                                    echo "<option value='".$val['id'].".".$val['name']."'>".$val['name']."</option>";
+                                    echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
                                 }
                              ?>
                         </select>

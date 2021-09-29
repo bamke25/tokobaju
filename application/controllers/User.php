@@ -68,6 +68,8 @@ class User extends CI_Controller
 
         $this->usermodel->insertKeranjang($data,'keranjang');
         redirect('user/#cart');
+
+
     }
      public function delete_cart($id)
     {
@@ -102,7 +104,7 @@ class User extends CI_Controller
         // Set defaultnya dengan tag option Pilih
         $lists = "<option value=''>Kota atau Kabupaten</option>";
         foreach($kota as $data){
-            $lists .= "<option value='".$data->id.".".$data->name."'>".$data->name."</option>"; // Tambahkan tag option ke variabel $lists
+            $lists .= "<option value='".$data->kota_id.".".$data->nama_kota."'>".$data->nama_kota."</option>"; // Tambahkan tag option ke variabel $lists
         }
         $callback = array('get_city'=>$lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
         echo json_encode($callback);
@@ -111,7 +113,6 @@ class User extends CI_Controller
     public function account(){
         $this->load->model('Usermodel');
 
-        //these lines load the cart
         $data['name'] = $this->session->userdata('name');
         $data['produk'] = $this->usermodel->getProduk(0);
         $data['keranjang'] = $this->usermodel->getKeranjang();
@@ -119,12 +120,8 @@ class User extends CI_Controller
         $harga = $this->usermodel->getTotalkeranjang();
         $data['total'] = $harga['total'];
 
-        $data['provinsi'] = $this->usermodel->getProvinsi();
-
-        //load the pages which are required
-        echo "<title>My Account</title>";
         $this->load->view('templates/user_navbar', $data);
-        $this->load->view('user/account', $data);
+        $this->load->view('user/account');
         $this->load->view('templates/user_header',$data);
     }
 
@@ -206,6 +203,8 @@ class User extends CI_Controller
                         'no_telepon' => $no
         );
         $insert = $this->usermodel->insert_history("tbl_alamat",$data);
+        $callback = array('get_city'=>$insert); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+        echo json_encode($callback); 
         // Buat variabel untuk menampung tag-tag option nya
         // Set defaultnya dengan tag option Pilih
         
@@ -245,11 +244,6 @@ class User extends CI_Controller
                 }
             }
         }
-    }
-
-    public function account_act(){
-        //load the model
-        $this->load->model('Usermodel');
     }
 
     public function logout(){

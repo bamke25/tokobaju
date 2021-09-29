@@ -83,8 +83,8 @@
                     },
                     success: function(response){ // Ketika proses pengiriman berhasil
                       // Sembunyikan loadingnya
-                       // var alamat = $("#alamat").val();
-                       // var nama_type = $("#nama_type").val();
+                       var alamat = $("#alamat").val();
+                       var nama_type = $("#nama_type").val();
                        // var provinsi = $("#provinsi option:selected").text();
                        // var kabupaten = $("#kabupaten option:selected").text();
                        // var kecamatan = $("#kecamatan option:selected").text();
