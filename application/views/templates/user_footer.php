@@ -64,13 +64,13 @@
             });
 
       $("#save").click(function(){ // Ketika user mengganti atau memilih data provinsi
- 
                 $.ajax({
                     type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                    url: "<?php echo base_url("user/insert_history"); ?>", // Isi dengan url/path file php yang dituju
+                    url: "<?php echo base_url("user/update_alamat"); ?>", // Isi dengan url/path file php yang dituju
                     data: {
                             nama : $("#name").val(),
                             no_tlp : $("#tlp").val(),
+                            lahir : $("#lahir").val(),
                             provinsi   : $("#provinsi").val(),
                             kota          : $("#kota").val(),
                             alamat          : $("#alamat").val()

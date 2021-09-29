@@ -253,7 +253,7 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="<?=base_url('user/insert_history')?>" method="post" class="contentinfo">
+        <form class="contentinfo" method="post" onsubmit="return false">
             <div class="boxform">
                     <div class="form">
                         <label for="name">nama</label>
@@ -262,6 +262,10 @@
                     <div class="form">
                         <label for="tlp">No telepon</label>
                         <input type="text" tlp="tlp" id="tlp" name="no_tlp" placeholder="masukan no telepon">
+                    </div>
+                    <div class="form">
+                        <label for="lahir">Tempat Lahir</label>
+                        <input type="text"  id="lahir" name="lahir" placeholder="masukan tempat lahir">
                     </div>
                     <div class="form">
                         <label for="profinsi">profinsi</label> <br>
@@ -290,8 +294,8 @@
                         </div>
                     </div>
                     <div class="form">
-                        <button id="save" type="submit">save</button>
-                        <button id="edit" type="submit">edit</button>
+                        <button id="save" onclick="">save</button>
+                        <button id="edit">edit</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
                     
@@ -307,6 +311,7 @@
             </div>
             <div class="close">
                 <a href="#"></a>
+
             </div>
         </div>
         <form action="" class="contentinfo">
