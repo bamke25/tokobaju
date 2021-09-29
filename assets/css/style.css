@@ -666,12 +666,12 @@ footer .copyright a{
 .boxform .form img{
     width: 29px;
 }
-.boxform .form input, .boxform .form select, .select{
+.boxform .form input, .boxform .form select, {
     border: none;
     border-bottom: 1px solid black;
     margin-top: 20px;
 }
-.boxform .form input:focus, .boxform .form select:focus{
+.boxform .form input:focus, .boxform .form select:focus, .select:focus{
     outline: 0;
     transform: scale(1.02);
     -webkit-transform: scale(1.02);

@@ -111,7 +111,7 @@ class User extends CI_Controller
     public function account(){
         $this->load->model('Usermodel');
 
-        //these lines load the 
+        //these lines load the cart
         $data['name'] = $this->session->userdata('name');
         $data['produk'] = $this->usermodel->getProduk(0);
         $data['keranjang'] = $this->usermodel->getKeranjang();
@@ -119,8 +119,12 @@ class User extends CI_Controller
         $harga = $this->usermodel->getTotalkeranjang();
         $data['total'] = $harga['total'];
 
+        $data['provinsi'] = $this->usermodel->getProvinsi();
+
+        //load the pages which are required
+        echo "<title>My Account</title>";
         $this->load->view('templates/user_navbar', $data);
-        $this->load->view('user/account');
+        $this->load->view('user/account', $data);
         $this->load->view('templates/user_header',$data);
     }
 
@@ -241,6 +245,11 @@ class User extends CI_Controller
                 }
             }
         }
+    }
+
+    public function account_act(){
+        //load the model
+        $this->load->model('Usermodel');
     }
 
     public function logout(){

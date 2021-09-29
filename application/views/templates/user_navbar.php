@@ -15,9 +15,7 @@
             <?php
             // check if user is logged in or not
             if ($this->session->userdata('name') != null ){?>
-            <li><a href="#login"><img src="<?php echo base_url('assets/img/user.png')?>" alt="">
-
-                <li><a href="#"><img src="<?=base_url('assets/img/user.png')?>" alt="">
+            <li><a href="#"><img src="<?php echo base_url('assets/img/user.png')?>" alt="">
                 <span><?php echo $this->session->userdata('name');?></span>
             <li><a href="<?php echo base_url('User/logout/')?>"><span>Logout</span></a>
             </a></li>
@@ -30,8 +28,8 @@
             </a></li>
             
             <?php }?>
+            <li><a href="<?php echo base_url('user/account');?>"><img src="<?= base_url('assets/img/user.png') ?>" alt=""></a></li>
 
-            <li><a href="<?= base_url('user/account');?>"><img src="<?= base_url('assets/img/user.png') ?>" alt=""></a></li>
             <?php if ($jumlah > 0) { ?>
             <li><a href="#cart"><img style="color: red" src="<?= base_url('assets/img/store.png') ?>" alt=""><span style="color: red"><?=$jumlah;?></span></a></li>
             <?php }else{ ?>
