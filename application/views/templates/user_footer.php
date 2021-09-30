@@ -21,7 +21,7 @@
         <div class="copyright"><a href="">© 2021, Mascitra.Merch</a></div>
     </footer>
 <script type="text/javascript">
-    $(".notif").hide();
+    $(".notif").show();
     $(document).ready(function(){
       $('.btnfo').click(function(){
         var id,keterangan,imageproduk, namaproduk, hargaproduk,id_produk;
@@ -38,7 +38,6 @@
         $("#id_produk").val(id_produk);
       });   
       $("#provinsi").change(function(){ // Ketika user mengganti atau memilih data provinsi
-    $(".notif").show("easing");
                 var hasil = $("#provinsi").val().split(".");
                 $.ajax({
                     type: "POST", // Method pengiriman data bisa dengan GET atau POST
@@ -63,48 +62,6 @@
                 });
             });
 
-      $("#save").click(function(){ // Ketika user mengganti atau memilih data provinsi
-                $.ajax({
-                    type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                    url: "<?php echo base_url("user/update_alamat"); ?>", // Isi dengan url/path file php yang dituju
-                    data: {
-                            nama : $("#name").val(),
-                            no_tlp : $("#tlp").val(),
-                            lahir : $("#lahir").val(),
-                            provinsi   : $("#provinsi").val(),
-                            kota          : $("#kota").val(),
-                            alamat          : $("#alamat").val()
-                            }, // data yang akan dikirim ke file yang dituju
-                    dataType: "json",
-                    beforeSend: function(e) {
-                        if(e && e.overrideMimeType) {
-                                e.overrideMimeType("application/json;charset=UTF-8");
-                        }
-                    },
-                    success: function(response){ // Ketika proses pengiriman berhasil
-                      // Sembunyikan loadingnya
-                       var alamat = $("#alamat").val();
-                       var nama_type = $("#nama_type").val();
-                       // var provinsi = $("#provinsi option:selected").text();
-                       // var kabupaten = $("#kabupaten option:selected").text();
-                       // var kecamatan = $("#kecamatan option:selected").text();
-                       // var desa = $("#desa option:selected").text();
-                       // $(".alamat_lengkap_sekali")[0].innerHTML = alamat + " ";
-                       // $(".alamat_lengkap_sekali")[1].innerHTML = nama_type + " ";
-                       // $(".alamat_lengkap_sekali")[2].innerHTML = desa + " ";
-                       // $(".alamat_lengkap_sekali")[3].innerHTML = kecamatan + " ";
-                       // $(".alamat_lengkap_sekali")[4].innerHTML = kabupaten + " ";
-                       // $(".alamat_lengkap_sekali")[5].innerHTML = provinsi;
-                       //  $("#pesan").show("slow");
-                       //  setTimeout(function(){ $("#pesan").hide("slow"); }, 3000);
-                        // set isi dari combobox kota
-                        // lalu munculkan kembali combobox kotanya
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
-                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
-                    }
-                });
-            });
     });
 </script>
 </body>

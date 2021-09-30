@@ -16,6 +16,8 @@ class User extends CI_Controller
         $this->load->model('usermodel');
         $data['produk'] = $this->usermodel->getProduk(1);
         $data['keranjang'] = $this->usermodel->getKeranjang();
+        $data['alamat'] = $this->usermodel->getAlamat($this->session->userdata('name'));
+        $data['dataalamat'] = $this->usermodel->getProvinsiId($data['alamat']['kota_id']);
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
         $data['provinsi'] = $this->usermodel->getProvinsi();
         $harga = $this->usermodel->getTotalkeranjang();
@@ -186,15 +188,14 @@ class User extends CI_Controller
         }
     }
 
-    public function history(){
-
-    }
+ 
     public function update_alamat(){
         $nama = $this->input->post('nama');
         $no = $this->input->post('no_tlp');
         $lahir = $this->input->post('lahir');
         $kota = $this->input->post('kota');
         $id_kota = explode(".", $kota);
+        $key = array('name' =>  $nama );
         $alamat = $this->input->post('alamat');
         $data = array(
                         'alamat_lengkap'  => $alamat,
@@ -202,7 +203,10 @@ class User extends CI_Controller
                         'kota_id' => $id_kota[0],
                         'no_hp' => $no
         );
-        $this->usermodel->update_alamat($nama,$data);
+        $this->usermodel->update_alamat($key,$data);
+        echo "<script>alert('Berhasil')</script>";
+        redirect('user/#tujuan');
+
         // Buat variabel untuk menampung tag-tag option nya
         // Set defaultnya dengan tag option Pilih
         

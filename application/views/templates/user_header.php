@@ -253,19 +253,24 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form class="contentinfo" method="post" onsubmit="return false">
+        <form class="contentinfo" method="post" action="<?=base_url('user/update_alamat');?>">
             <div class="boxform">
+                    <!-- <div class="form notif">
+                        <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
+                            BERHASIL 
+                        </div>
+                    </div> -->
                     <div class="form">
                         <label for="name">nama</label>
                         <input type="text"  value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
                     </div>
                     <div class="form">
                         <label for="tlp">No telepon</label>
-                        <input type="text" tlp="tlp" id="tlp" name="no_tlp" placeholder="masukan no telepon">
+                        <input type="text" tlp="tlp" id="tlp" value="<?php if($alamat['no_hp'] == null){echo "";}else{echo $alamat['no_hp'];}?>" name="no_tlp" placeholder="masukan no telepon">
                     </div>
                     <div class="form">
                         <label for="lahir">Tempat Lahir</label>
-                        <input type="text"  id="lahir" name="lahir" placeholder="masukan tempat lahir">
+                        <input type="text"  id="lahir" name="lahir" value="<?php if($alamat['tempat_lahir'] == null){echo "";}else{echo $alamat['tempat_lahir'];}?>" placeholder="masukan tempat lahir">
                     </div>
                     <div class="form">
                         <label for="profinsi">profinsi</label> <br>
@@ -273,7 +278,19 @@
                             <option value="">Silahkan dipilih</option>
                             <?php 
                                 foreach ($provinsi as $val) {
-                                    echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                    if ($alamat['kota_id'] == null) {
+                                       echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                    } else {
+                                        if ($dataalamat['nama_provinsi'] == $val['nama_provinsi']) {
+                                           echo "<option selected value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                        } else {
+                                            echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                    
                                 }
                              ?>
                         </select>
@@ -281,21 +298,22 @@
                     <div class="form">
                         <label for="kota">Kota</label><br>
                         <select name="kota" id="kota">
-                            <option value="">Kota Atau Kabupaten</option>
+                            <?php if ($alamat['kota_id'] == null) {
+                                echo "<option value=''>Kota Atau Kabupaten</option>";
+                            }else{
+                                echo "<option  value=''>".$dataalamat['nama_kota']."</option>";
+                            }
+                            ?>
+                            
                         </select>
                     </div>
                     <div class="form">
                         <label for="alamat">alamat</label>
-                        <textarea name="alamat" id="alamat" cols="38" rows="5"></textarea>
+                        <textarea name="alamat" id="alamat" cols="38" rows="5"><?php if($alamat['alamat_lengkap'] == null){echo "";}else{echo $alamat['alamat_lengkap'];}?></textarea>
                     </div>
-                    <div class="form notif">
-                        <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
-                            BERHASIL 
-                        </div>
-                    </div>
+                    
                     <div class="form">
-                        <button id="save" onclick="">save</button>
-                        <button id="edit">edit</button>
+                        <button id="save" type="submit">save</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
                     
