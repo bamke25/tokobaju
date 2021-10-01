@@ -39,6 +39,10 @@ class Usermodel extends CI_Model{
         $data = $this->db->get("keranjang");
         return $data->num_rows();
     }
+    public function getTolkeranjangById($id){
+        $data = $this->db->where('id_produk',$id)->get("keranjang");
+        return $data->num_rows();
+    }
 
     public function getKeranjang(){
 
@@ -51,7 +55,7 @@ class Usermodel extends CI_Model{
         return $data->result_array();
     }
     public function getProvinsiId($id){
-        $this->db->select("provinsi.nama_provinsi, kota.nama_kota");
+        $this->db->select("provinsi.nama_provinsi, kota.nama_kota, kota.kota_id");
         $this->db->join("kota","kota.provinsi_id = provinsi.provinsi_id AND kota_id = $id");
         return $this->db->get('provinsi')->row_array();
     }

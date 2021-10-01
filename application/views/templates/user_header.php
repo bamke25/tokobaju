@@ -242,7 +242,7 @@
         </form>
         </div>
 
-
+<?php if($this->session->userdata('name') != null) { ?>
 <div id="tujuan">
         <div class="navinfo" id="navinfo">
             
@@ -255,11 +255,17 @@
         </div>
         <form class="contentinfo" method="post" action="<?=base_url('user/update_alamat');?>">
             <div class="boxform">
-                    <!-- <div class="form notif">
+                    <?php if ($this->session->flashdata('notifal') != null ):?>
+                        <div class="form notif">
                         <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
                             BERHASIL 
                         </div>
-                    </div> -->
+                    </div>
+                    <script>setTimeout(function(){ $('.notif').hide('slideup') }, 2000);</script>
+                    <?php
+                    $this->session->unset_userdata('notifal');
+                     endif ?>
+                    
                     <div class="form">
                         <label for="name">nama</label>
                         <input type="text"  value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
@@ -301,7 +307,7 @@
                             <?php if ($alamat['kota_id'] == null) {
                                 echo "<option value=''>Kota Atau Kabupaten</option>";
                             }else{
-                                echo "<option  value=''>".$dataalamat['nama_kota']."</option>";
+                                echo "<option  value='".$dataalamat['kota_id']."'>".$dataalamat['nama_kota']."</option>";
                             }
                             ?>
                             
@@ -321,7 +327,7 @@
         </form>
 </div>
 
-
+<?php } ?>
 <div id="checkout">
         <div class="navinfo" id="navinfo">
             <div class="info">

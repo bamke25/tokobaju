@@ -17,7 +17,10 @@ class User extends CI_Controller
         $data['produk'] = $this->usermodel->getProduk(1);
         $data['keranjang'] = $this->usermodel->getKeranjang();
         $data['alamat'] = $this->usermodel->getAlamat($this->session->userdata('name'));
-        $data['dataalamat'] = $this->usermodel->getProvinsiId($data['alamat']['kota_id']);
+        if ($this->session->userdata('name') != null) {
+            $data['dataalamat'] = $this->usermodel->getProvinsiId($data['alamat']['kota_id']);
+        }
+        
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
         $data['provinsi'] = $this->usermodel->getProvinsi();
         $harga = $this->usermodel->getTotalkeranjang();
@@ -67,8 +70,9 @@ class User extends CI_Controller
                 'quantity'  =>$quantity,
                 'total'     => $total
                 );
-
-        $this->usermodel->insertKeranjang($data,'keranjang');
+       if ($this->usermodel->getTolkeranjangById($id_produk) == 0) {
+            $this->usermodel->insertKeranjang($data,'keranjang');
+        }
         redirect('user/#cart');
 
 
@@ -204,7 +208,7 @@ class User extends CI_Controller
                         'no_hp' => $no
         );
         $this->usermodel->update_alamat($key,$data);
-        echo "<script>alert('Berhasil')</script>";
+        $this->session->set_flashdata('notifal',"a");
         redirect('user/#tujuan');
 
         // Buat variabel untuk menampung tag-tag option nya
