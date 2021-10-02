@@ -1,75 +1,84 @@
-<div class='col-md-12'>
-    <div class='box box-info'>
-        <div class='box-header with-border'>
-            <h3 class='box-title'><?php echo $title; ?></h3>
-            <a class='btn btn-warning btn-sm' href='<?php echo base_url(); ?>administrator/orders'>Kembali</a>
+<div class='container-fluid'>
+
+    <h1 class="h4 mb-2 text-gray-800">Semua detail konfirmasi Pembayaran</h1>
+    <p class="mb-4">Menampilkan semua detail konfirmasi pembayaran pembeli dari dari toko baju MasCitra.com</p>
+
+    <div class='card shadow mb-4'>
+        <div class='card-header py-3'>
+            <a style="float: right;" class='btn btn-warning btn-sm' href=<?= base_url('admin/orders'); ?>>Kembali</a>
         </div>
-        <div class='box-body'>
-            <div class='col-md-12'>
-                <?php
-                if ($total['proses'] == '0') {
+
+        <div class="card-body">
+            <div class="row g-0">
+                <?php if ($total['proses'] == '0') {
                     $proses = '<i class="text-danger">Pending</i>';
                 } elseif ($total['proses'] == '1') {
-                    $proses = '<i class="text-warning">Proses</i>';
+                    $proses = '<i class="text-warning">Packing</i>';
                 } elseif ($total['proses'] == '2') {
                     $proses = '<i class="text-info">Konfirmasi</i>';
+                } elseif ($total['proses'] == '3') {
+                    $proses = '<i class="text-success">Dikirim</i>';
                 } else {
-                    $proses = '<i class="text-success">Packing </i>';
-                }
-                echo
-                "<div class='col-md-7'>
-                    <dl class='dl-horizontal'>
-                        <dt>Nama</dt>               <dd>$rows[nama_lengkap]</dd>
-                        <dt>No Telpon/Hp</dt>       <dd>$rows[no_hp]</dd>
-                        <dt>Email</dt>              <dd>$rows[email]</dd>
-                        <dt>Kota</dt>               <dd>$rows[nama_kota]</dd>
-                        <dt>Alamat Lengkap</dt>     <dd>$rows[alamat_lengkap]</dd>
+                    $proses = '<i class="text-success">Diterima</i>';
+                } ?>
+                <div class="col-md-7">
+                    <dl class="dl-horizontal">
+                        <dt>Nama</dt>
+                        <dd><?= $rows['name']; ?></dd>
+                        <dt>No Telp</dt>
+                        <dd><?= $rows['no_hp'] ?></dd>
+                        <dt>Email</dt>
+                        <dd><?= $rows['email'] ?></dd>
+                        <dt>Kota</dt>
+                        <dd><?= $rows['nama_kota'] ?></dd>
+                        <dt>Alamat Lengkap</dt>
+                        <dd><?= $rows['alamat_lengkap'] ?></dd>
                     </dl>
                 </div>
-
-                <div class='col-md-5'>
+                <div class="col-md-5">
                     <center>
-                    Total Tagihan 
-                    <h4 style='margin:0px;'>$total[total] + $total[ongkir] + " . substr($this->uri->segment(3), -3) . "<br> <br> 
-                    <span style='text-transform:uppercase'>$total[kurir]</span> ($total[service])
-                    </h4>
-                    Status : <i>$proses</i>   
-                    <form action='" . base_url() . "administrator/tracking/" . $this->uri->segment(3) . "/$total[id_penjualan]' method='POST'>
-                        Input Resi <input type='text' name='resi' class='form-control' value='$total[resi]' style='display:inline-block; color:red; width:60%'>
-                        <input style='margin-top:-4px' class='btn btn-primary' type='submit' name='submit' value='Submit'>
-                    </form>
-                    </center><br>
+                        Total Tagihan
+                        <h4 style="margin: 0px;">
+                            <?= "Rp " . rupiah($total['total'] + $total['ongkir']); ?> <br> <br>
+                            <span style="text-transform: uppercase;"><?= $total['kurir']; ?></span> <?= $total['service']; ?>
+                        </h4>
+                        Status: <i><?= $proses ?></i>
+                        <form action="<?= base_url('admin/tracking') . $this->uri->segment(3) . $total['id_penjualan']; ?>" method="POST">
+                            Input resi <input type="text" name="resi" class="form-control" value="<?= $total['resi'] ?>" style="display: inline-block; color:red; width:60%">
+                            <input type="submit" name="submit" value="submit" id="">
+                        </form>
+                    </center> <br> <br>
                 </div>
 
-                <table class='table table-striped table-condensed '>
+                <table class="table table-striped table-condensed">
                     <thead>
-                        <tr bgcolor='#e3e3e3'>
-                        <th width='30px'>$no</th>
-                        <th width='47%'>Nama Produk</th>
-                        <th>Harga</th>
-                        <th>Qty</th>
-                        <th>Berat</th>
-                        <th>Total</th>
+                        <tr bgcolor="#e3e3e3">
+                            <th width="30px">No</th>
+                            <th width="47%">Nama Produk</th>
+                            <th>Harga</th>
+                            <th>Qty</th>
+                            <th>Berat</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
-                <tbody>";
-                $no = 1;
-                $diskon_total = 0;
-                foreach ($record->result_array() as $row) 
-                {
-                    $sub_total = (($row['harga_jual'] - $row['diskon']) * $row['jumlah']);
-                    if ($row['diskon'] != '0') {
-                        $diskon = "<del style='color:red'>$row[harga_jual]</del>";
-                    } else {
-                        $diskon = "";
-                    }
-                    if (trim($row['gambar']) == '') {
-                        $foto_produk = 'no-image.png';
-                    } else {
-                        $foto_produk = $row['gambar'];
-                    }
-                    $diskon_total = $diskon_total + $row['diskon'] * $row['jumlah'];
-                    echo "
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $diskon_total = 0;
+                        foreach ($record->result_array() as $row) {
+                            $sub_total = (($row['harga_jual'] - $row['diskon']) * $row['jumlah']);
+                            if ($row['diskon'] != '0') {
+                                $diskon = "<del style='color:red'>$row[harga_jual]</del>";
+                            } else {
+                                $diskon = "";
+                            }
+                            if (trim($row['gambar']) == '') {
+                                $foto_produk = 'no-image.png';
+                            } else {
+                                $foto_produk = $row['gambar'];
+                            }
+                            $diskon_total = $diskon_total + $row['diskon'] * $row['jumlah'];
+                            echo "
                             <tr>
                                 <td>$no</td>
                                 <td class='valign'><a href='" . base_url() . "produk/detail/$row[produk_seo]'>$row[nama_produk]</a><br>
@@ -79,8 +88,9 @@
                                 <td class='valign'>" . ($row['berat'] * $row['jumlah']) . " Gram</td>
                                 <td class='valign'>$sub_total</td>
                             </tr>";
-                    $no++;
-                }   echo "
+                            $no++;
+                        }
+                        echo "
                             <tr class='success'>
                                 <td colspan='5'><b>Subtotal </b> <i class='pull-right'>(" . $total['total'] . " Rupiah)</i></td>
                                 <td><b>Rp " . ($total['total']) . "</b></td>
@@ -94,34 +104,35 @@
                             <tr class='success'>
                                 <td colspan='5'><b>Berat</b> <i class='pull-right'>(" . ($total['total_berat']) . " Gram)</i></td>
                                 <td><b>$total[total_berat] Gram</b></td>
-                            </tr>
-
+                            </tr>";
+                        ?>
                     </tbody>
-                    </table><br>";
+                </table>
 
+                <?php
                 $cek_konfirmasi = $this->ModelOrders->view_where('konfirmasi', array('id_penjualan' => $total['id_penjualan']));
-                if ($cek_konfirmasi->num_rows() >= 1) 
-                {
-                    echo "<div class='alert alert-success' style='border-radius:0px; padding:5px'>Konfirmasi Pembayaran dari Pembeli : </div>";
-                    $konfirmasi = $this->model_app->view_join_where('rb_konfirmasi', 'rb_rekening', 'id_rekening', array('id_penjualan' => $total['id_penjualan']), 'id_konfirmasi_pembayaran', 'DESC');
-                    foreach ($konfirmasi as $r) 
-                    {
+                if ($cek_konfirmasi->num_rows() >= 1) {
+                    echo "
+                        <div class='alert alert-success' style='border-radius:0px; padding:5px'>Konfirmasi Pembayaran dari Pembeli : </div>";
+                    $konfirmasi = $this->ModelOrders->view_join_where('konfirmasi', 'rekening', 'id_rekening', array('id_penjualan' => $total['id_penjualan']), 'id_konfirmasi_pembayaran', 'DESC');
+                    foreach ($konfirmasi as $r) {
                         echo "
-                        <div class='col-md-8'>
-                            <dl class='dl-horizontal'>
-                                <dt>Nama Pengirim</dt>       <dd>$r[nama_pengirim]</dd>
-                                <dt>Total Transfer</dt>      <dd>$r[total_transfer]</dd>
-                                <dt>Tanggal Transfer</dt>    <dd>$r[tanggal_transfer]</dd>
-                                <dt>Bukti Transfer</dt>      <dd><a href='" . base_url() . "administrator/download_file/$r[bukti_transfer]'>Download File</a></dd>
-                                <dt>Rekening Tujuan</dt>     <dd>$r[nama_bank] - $r[no_rekening] - $r[pemilik_rekening]</dd>
-                                <dt>Waktu Konfirmasi</dt>    <dd>$r[waktu_konfirmasi]</dd>
-                            </dl>
-                        </div>";
+                            <div class='col-md-8'>
+                                <dl class='dl-horizontal'>
+                                    <dt>Nama Pengirim</dt>       <dd>$r[nama_pengirim]</dd>
+                                    <dt>Total Transfer</dt>      <dd>$r[total_transfer]</dd>
+                                    <dt>Tanggal Transfer</dt>    <dd>$r[tanggal_transfer]</dd>
+                                    <dt>Bukti Transfer</dt>      <dd></dd>
+                                    <dt>Rekening Tujuan</dt>     <dd>$r[nama_bank] - $r[no_rekening] - $r[pemilik_rekening]</dd>
+                                    <dt>Waktu Konfirmasi</dt>    <dd>$r[waktu_konfirmasi]</dd>
+                                </dl>
+                            </div>";
                     }
                 }
+                ?>
 
-                echo "
+            </div>
         </div>
-      </div>
+
     </div>
-  </div>";
+</div>

@@ -31,4 +31,14 @@ class ModelOrders extends CI_model
     {
         return $this->db->query("SELECT * FROM `penjualan` a ORDER BY a.id_penjualan DESC LIMIT $limit");
     }
+
+    public function view_join_where($table1, $table2, $field, $where, $order, $ordering)
+    {
+        $this->db->select('*');
+        $this->db->from($table1);
+        $this->db->join($table2, $table1 . '.' . $field . '=' . $table2 . '.' . $field);
+        $this->db->where($where);
+        $this->db->order_by($order, $ordering);
+        return $this->db->get()->result_array();
+    }
 }

@@ -16,6 +16,11 @@ class User extends CI_Controller
         $this->load->model('usermodel');
         $data['produk'] = $this->usermodel->getProduk(1);
         $data['keranjang'] = $this->usermodel->getKeranjang();
+        $data['alamat'] = $this->usermodel->getAlamat($this->session->userdata('name'));
+        if ($this->session->userdata('name') != null) {
+            $data['dataalamat'] = $this->usermodel->getProvinsiId($data['alamat']['kota_id']);
+        }
+        
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
         $data['provinsi'] = $this->usermodel->getProvinsi();
         $harga = $this->usermodel->getTotalkeranjang();
@@ -65,8 +70,9 @@ class User extends CI_Controller
                 'quantity'  =>$quantity,
                 'total'     => $total
                 );
-
-        $this->usermodel->insertKeranjang($data,'keranjang');
+       if ($this->usermodel->getTolkeranjangById($id_produk) == 0) {
+            $this->usermodel->insertKeranjang($data,'keranjang');
+        }
         redirect('user/#cart');
 
 
@@ -203,25 +209,25 @@ class User extends CI_Controller
         }
     }
 
-    public function history(){
-
-    }
-    public function insert_history(){
+ 
+    public function update_alamat(){
         $nama = $this->input->post('nama');
         $no = $this->input->post('no_tlp');
-        $provinsi = $this->input->post('provinsi');
+        $lahir = $this->input->post('lahir');
         $kota = $this->input->post('kota');
+        $id_kota = explode(".", $kota);
+        $key = array('name' =>  $nama );
         $alamat = $this->input->post('alamat');
         $data = array(
-                        'nama' => $nama,
-                        'alamat'  => $alamat,
-                        'provinsi' => $provinsi,
-                        'kota' => $kota,
-                        'no_telepon' => $no
+                        'alamat_lengkap'  => $alamat,
+                        'tempat_lahir'  => $lahir,
+                        'kota_id' => $id_kota[0],
+                        'no_hp' => $no
         );
-        $insert = $this->usermodel->insert_history("tbl_alamat",$data);
-        $callback = array('get_city'=>$insert); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
-        echo json_encode($callback); 
+        $this->usermodel->update_alamat($key,$data);
+        $this->session->set_flashdata('notifal',"a");
+        redirect('user/#tujuan');
+
         // Buat variabel untuk menampung tag-tag option nya
         // Set defaultnya dengan tag option Pilih
         

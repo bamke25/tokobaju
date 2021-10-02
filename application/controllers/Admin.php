@@ -17,7 +17,8 @@ class Admin extends CI_Controller
     // Login dan Registrasi
     public function index()
     {
-        $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
+        // $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('username', 'username', 'required|trim');
         $this->form_validation->set_rules('password', 'password', 'required|trim');
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login';
@@ -32,9 +33,11 @@ class Admin extends CI_Controller
 
     private function _login()
     {
+        $username = $this->input->post('username');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        $user = $this->db->get_where('user', ['username' => $username])->row_array();
         // Jika user ada
         if ($user) {
             // Jika user aktif
@@ -43,6 +46,7 @@ class Admin extends CI_Controller
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
+                        'id' => $user['id'],
                         'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data);
@@ -76,6 +80,14 @@ class Admin extends CI_Controller
             ]
         );
         $this->form_validation->set_rules(
+            'username',
+            'username',
+            'required|trim|is_unique[user.username]',
+            [
+                'is_unique' => 'this username has already registered!'
+            ]
+        );
+        $this->form_validation->set_rules(
             'password1',
             'password',
             'required|trim|min_length[5]|matches[password2]',
@@ -95,6 +107,7 @@ class Admin extends CI_Controller
             $data = [
                 'name' => htmlspecialchars($this->input->post('name', true)),
                 'email' => htmlspecialchars($this->input->post('email', true)),
+                'username' => htmlspecialchars($this->input->post('username', true)),
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
@@ -111,6 +124,7 @@ class Admin extends CI_Controller
     public function logout()
     {
         $this->session->unset_userdata('email');
+        $this->session->unset_userdata('id');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         You have been logout!</div>');
@@ -491,8 +505,8 @@ class Admin extends CI_Controller
         if (isset($_POST['submit'])) {
             $data = array('resi' => $this->input->post('resi'));
             $where = array('id_penjualan' => $this->uri->segment('4'));
-            $this->model_app->update('rb_penjualan', $data, $where);
-            redirect('administrator/tracking/' . $this->uri->segment('3'));
+            $this->model_app->update('penjualan', $data, $where);
+            redirect('admin/tracking/' . $this->uri->segment('3'));
         }
     }
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Sep 2021 pada 12.59
--- Versi server: 10.4.18-MariaDB
--- Versi PHP: 8.0.3
+-- Generation Time: Sep 29, 2021 at 11:03 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_pembelian`
+-- Table structure for table `detail_pembelian`
 --
 
 CREATE TABLE `detail_pembelian` (
@@ -37,7 +37,7 @@ CREATE TABLE `detail_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `detail_pembelian`
+-- Dumping data for table `detail_pembelian`
 --
 
 INSERT INTO `detail_pembelian` (`id_pembelian_detail`, `id_pembelian`, `id_produk`, `harga_pesan`, `jumlah_pesan`, `satuan`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `detail_pembelian` (`id_pembelian_detail`, `id_pembelian`, `id_produ
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_penjualan`
+-- Table structure for table `detail_penjualan`
 --
 
 CREATE TABLE `detail_penjualan` (
@@ -62,7 +62,7 @@ CREATE TABLE `detail_penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `detail_penjualan`
+-- Dumping data for table `detail_penjualan`
 --
 
 INSERT INTO `detail_penjualan` (`id_penjualan_detail`, `id_penjualan`, `id_produk`, `jumlah`, `harga_jual`, `satuan`, `keterangan_order`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `detail_penjualan` (`id_penjualan_detail`, `id_penjualan`, `id_produ
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori_produk`
+-- Table structure for table `kategori_produk`
 --
 
 CREATE TABLE `kategori_produk` (
@@ -80,7 +80,7 @@ CREATE TABLE `kategori_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kategori_produk`
+-- Dumping data for table `kategori_produk`
 --
 
 INSERT INTO `kategori_produk` (`id_kategori`, `nama_kategori`) VALUES
@@ -90,7 +90,28 @@ INSERT INTO `kategori_produk` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `konfirmasi`
+-- Table structure for table `keranjang`
+--
+
+CREATE TABLE `keranjang` (
+  `id` int(3) NOT NULL,
+  `id_produk` int(3) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `total` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id`, `id_produk`, `quantity`, `total`) VALUES
+(10, 28, 1, 200000),
+(11, 27, 6, 1800000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `konfirmasi`
 --
 
 CREATE TABLE `konfirmasi` (
@@ -105,7 +126,7 @@ CREATE TABLE `konfirmasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `konfirmasi`
+-- Dumping data for table `konfirmasi`
 --
 
 INSERT INTO `konfirmasi` (`id_konfirmasi_pembayaran`, `id_penjualan`, `total_transfer`, `id_rekening`, `nama_pengirim`, `tanggal_transfer`, `bukti_transfer`, `waktu_konfirmasi`) VALUES
@@ -114,7 +135,7 @@ INSERT INTO `konfirmasi` (`id_konfirmasi_pembayaran`, `id_penjualan`, `total_tra
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kota`
+-- Table structure for table `kota`
 --
 
 CREATE TABLE `kota` (
@@ -124,7 +145,7 @@ CREATE TABLE `kota` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kota`
+-- Dumping data for table `kota`
 --
 
 INSERT INTO `kota` (`kota_id`, `provinsi_id`, `nama_kota`) VALUES
@@ -633,7 +654,7 @@ INSERT INTO `kota` (`kota_id`, `provinsi_id`, `nama_kota`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembelian`
+-- Table structure for table `pembelian`
 --
 
 CREATE TABLE `pembelian` (
@@ -643,7 +664,7 @@ CREATE TABLE `pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pembelian`
+-- Dumping data for table `pembelian`
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `waktu_beli`) VALUES
@@ -653,7 +674,7 @@ INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `waktu_beli`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan`
+-- Table structure for table `penjualan`
 --
 
 CREATE TABLE `penjualan` (
@@ -669,7 +690,7 @@ CREATE TABLE `penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `penjualan`
+-- Dumping data for table `penjualan`
 --
 
 INSERT INTO `penjualan` (`id_penjualan`, `kode_transaksi`, `id_pembeli`, `kurir`, `service`, `ongkir`, `resi`, `waktu_transaksi`, `proses`) VALUES
@@ -678,7 +699,7 @@ INSERT INTO `penjualan` (`id_penjualan`, `kode_transaksi`, `id_pembeli`, `kurir`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `produk`
+-- Table structure for table `produk`
 --
 
 CREATE TABLE `produk` (
@@ -695,7 +716,7 @@ CREATE TABLE `produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `produk`
+-- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `satuan`, `harga_beli`, `harga`, `berat`, `diskon`, `keterangan`, `gambar`) VALUES
@@ -711,7 +732,7 @@ INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `satuan`, `harg
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `provinsi`
+-- Table structure for table `provinsi`
 --
 
 CREATE TABLE `provinsi` (
@@ -720,7 +741,7 @@ CREATE TABLE `provinsi` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `provinsi`
+-- Dumping data for table `provinsi`
 --
 
 INSERT INTO `provinsi` (`provinsi_id`, `nama_provinsi`) VALUES
@@ -762,7 +783,7 @@ INSERT INTO `provinsi` (`provinsi_id`, `nama_provinsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rekening`
+-- Table structure for table `rekening`
 --
 
 CREATE TABLE `rekening` (
@@ -773,7 +794,7 @@ CREATE TABLE `rekening` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `rekening`
+-- Dumping data for table `rekening`
 --
 
 INSERT INTO `rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `pemilik_rekening`) VALUES
@@ -782,7 +803,7 @@ INSERT INTO `rekening` (`id_rekening`, `nama_bank`, `no_rekening`, `pemilik_reke
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -803,7 +824,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `username`, `jenis_kelamin`, `tempat_lahir`, `alamat_lengkap`, `kota_id`, `no_hp`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
@@ -813,7 +834,7 @@ INSERT INTO `user` (`id`, `name`, `email`, `username`, `jenis_kelamin`, `tempat_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_role`
+-- Table structure for table `user_role`
 --
 
 CREATE TABLE `user_role` (
@@ -822,7 +843,7 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_role`
+-- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`id`, `role`) VALUES
@@ -834,149 +855,161 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 --
 
 --
--- Indeks untuk tabel `detail_pembelian`
+-- Indexes for table `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
   ADD PRIMARY KEY (`id_pembelian_detail`);
 
 --
--- Indeks untuk tabel `detail_penjualan`
+-- Indexes for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   ADD PRIMARY KEY (`id_penjualan_detail`);
 
 --
--- Indeks untuk tabel `kategori_produk`
+-- Indexes for table `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indeks untuk tabel `konfirmasi`
+-- Indexes for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `konfirmasi`
 --
 ALTER TABLE `konfirmasi`
   ADD PRIMARY KEY (`id_konfirmasi_pembayaran`);
 
 --
--- Indeks untuk tabel `kota`
+-- Indexes for table `kota`
 --
 ALTER TABLE `kota`
   ADD PRIMARY KEY (`kota_id`);
 
 --
--- Indeks untuk tabel `pembelian`
+-- Indexes for table `pembelian`
 --
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`id_pembelian`);
 
 --
--- Indeks untuk tabel `penjualan`
+-- Indexes for table `penjualan`
 --
 ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`id_penjualan`);
 
 --
--- Indeks untuk tabel `produk`
+-- Indexes for table `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
--- Indeks untuk tabel `provinsi`
+-- Indexes for table `provinsi`
 --
 ALTER TABLE `provinsi`
   ADD PRIMARY KEY (`provinsi_id`);
 
 --
--- Indeks untuk tabel `rekening`
+-- Indexes for table `rekening`
 --
 ALTER TABLE `rekening`
   ADD PRIMARY KEY (`id_rekening`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_role`
+-- Indexes for table `user_role`
 --
 ALTER TABLE `user_role`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `detail_pembelian`
+-- AUTO_INCREMENT for table `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
   MODIFY `id_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `detail_penjualan`
+-- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   MODIFY `id_penjualan_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori_produk`
+-- AUTO_INCREMENT for table `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `konfirmasi`
+-- AUTO_INCREMENT for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `konfirmasi`
 --
 ALTER TABLE `konfirmasi`
   MODIFY `id_konfirmasi_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `kota`
+-- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
   MODIFY `kota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=502;
 
 --
--- AUTO_INCREMENT untuk tabel `pembelian`
+-- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
   MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `penjualan`
+-- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
   MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `produk`
+-- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
   MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT untuk tabel `provinsi`
+-- AUTO_INCREMENT for table `provinsi`
 --
 ALTER TABLE `provinsi`
   MODIFY `provinsi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT untuk tabel `rekening`
+-- AUTO_INCREMENT for table `rekening`
 --
 ALTER TABLE `rekening`
   MODIFY `id_rekening` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `user_role`
+-- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;

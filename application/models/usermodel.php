@@ -39,6 +39,10 @@ class Usermodel extends CI_Model{
         $data = $this->db->get("keranjang");
         return $data->num_rows();
     }
+    public function getTolkeranjangById($id){
+        $data = $this->db->where('id_produk',$id)->get("keranjang");
+        return $data->num_rows();
+    }
 
     public function getKeranjang(){
 		$this->db->select("keranjang.id,produk.gambar,produk.harga,keranjang.quantity,keranjang.total");
@@ -49,11 +53,22 @@ class Usermodel extends CI_Model{
         $data = $this->db->get("provinsi");
         return $data->result_array();
     }
+    public function getProvinsiId($id){
+        $this->db->select("provinsi.nama_provinsi, kota.nama_kota, kota.kota_id");
+        $this->db->join("kota","kota.provinsi_id = provinsi.provinsi_id AND kota_id = $id");
+        return $this->db->get('provinsi')->row_array();
+    }
+     public function getAlamat($name){
+        $data = $this->db->where('name',$name)->get('user');
+        return $data->row_array();
+    }
     public function insertKeranjang($data,$table){
         $this->db->insert($table,$data);
     }
-    public function insert_history($table,$data){
-        $this->db->insert($table,$data);
+    public function update_alamat($id,$data){
+        $this->db->where($id);
+        $this->db->update("user", $data);
+        return $this->db->affected_rows();  
     }
     public function deleteKeranjang($id,$table){
         $this->db->where($id);
