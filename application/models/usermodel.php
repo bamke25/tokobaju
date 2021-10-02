@@ -41,7 +41,6 @@ class Usermodel extends CI_Model{
     }
 
     public function getKeranjang(){
-
 		$this->db->select("keranjang.id,produk.gambar,produk.harga,keranjang.quantity,keranjang.total");
 		$this->db->join("produk","produk.id_produk = keranjang.id_produk");
      	return $this->db->get('keranjang')->result_array();
@@ -68,6 +67,16 @@ class Usermodel extends CI_Model{
        $this->db->where('provinsi_id', $id);
         $result = $this->db->get("kota")->result(); // Tampilkan semua data kota berdasarkan id provinsi
         return $result; 
+    }
+
+     public function get_kota(){
+    	$data = $this->db->query("SELECT * FROM kota");
+    	return $data->result();
+    }
+
+    //update properties of a registered user
+    public function s_usr_updt($kota, $alamat, $tlp, $name){
+    	$this->db->query("UPDATE user set alamat_lengkap ='".$alamat."', no_hp='".$tlp."', kota_id='".$kota."' where name like ".$name."");
     }
 
 }

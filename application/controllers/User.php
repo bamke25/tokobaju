@@ -102,7 +102,7 @@ class User extends CI_Controller
  
         // Buat variabel untuk menampung tag-tag option nya
         // Set defaultnya dengan tag option Pilih
-        $lists = "<option value=''>Kota atau Kabupaten</option>";
+        $lists = "<option value=''>Kota Atau Kabupaten</option>";
         foreach($kota as $data){
             $lists .= "<option value='".$data->kota_id.".".$data->nama_kota."'>".$data->nama_kota."</option>"; // Tambahkan tag option ke variabel $lists
         }
@@ -112,6 +112,7 @@ class User extends CI_Controller
 
     public function account(){
         $this->load->model('Usermodel');
+        echo "<title>My Account</title>";
 
         $data['name'] = $this->session->userdata('name');
         $data['produk'] = $this->usermodel->getProduk(0);
@@ -120,9 +121,25 @@ class User extends CI_Controller
         $harga = $this->usermodel->getTotalkeranjang();
         $data['total'] = $harga['total'];
 
+        $data['kota'] = $this->usermodel->get_kota();
+
         $this->load->view('templates/user_navbar', $data);
-        $this->load->view('user/account');
+        $this->load->view('user/account', $data);
         $this->load->view('templates/user_header',$data);
+    }
+
+    public function account_act(){
+        $this->load->model('usermodel');
+
+        //input fields
+        $kota = $this->input->post('kota');
+        $prov = $this->input->post('provinsi');
+        $name = $this->input->post('name');
+        $alamat = $this->input->post('alamat');
+        $tlp = $this->input->post('tlp');
+
+        $this->usermodel->s_usr_updt($kota, $alamat, $tlp, $name);
+        redirect('user/account/');
     }
 
 

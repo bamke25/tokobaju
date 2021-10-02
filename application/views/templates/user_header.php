@@ -261,10 +261,10 @@
                     </div>
                     <div class="form">
                         <label for="tlp">No telepon</label>
-                        <input type="text" tlp="tlp" id="tlp" name="no_tlp" placeholder="masukan no telepon">
+                        <input type="text" id="no_tlp" name="no_tlp" placeholder="masukan no telepon">
                     </div>
                     <div class="form">
-                        <label for="profinsi">profinsi</label> <br>
+                        <label for="provinsi">provinsi</label> <br>
                         <select name="provinsi" id="provinsi">
                             <option value="">Silahkan dipilih</option>
                             <?php 
