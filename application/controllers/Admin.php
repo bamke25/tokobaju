@@ -505,9 +505,15 @@ class Admin extends CI_Controller
         if (isset($_POST['submit'])) {
             $data = array('resi' => $this->input->post('resi'));
             $where = array('id_penjualan' => $this->uri->segment('4'));
-            $this->model_app->update('penjualan', $data, $where);
+            $this->ModelOrders->update('penjualan', $data, $where);
+            redirect('admin/tracking/' . $this->uri->segment('3'));
+        } elseif(isset($_POST['submit1'])) {
+            $data = array('ongkir' => $this->input->post('ongkir'));
+            $where = array('id_penjualan' => $this->uri->segment('4'));
+            $this->ModelOrders->update('penjualan', $data, $where);
             redirect('admin/tracking/' . $this->uri->segment('3'));
         }
+        
     }
 
 
@@ -524,6 +530,7 @@ class Admin extends CI_Controller
         $this->load->view('admin/penjualan/orders', $data);
         $this->load->view('templates/footer');
     }
+
     public function orders_status()
     {
         $data = array('proses' => $this->uri->segment(4));

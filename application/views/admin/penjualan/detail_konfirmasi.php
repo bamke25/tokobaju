@@ -1,10 +1,11 @@
 <div class='container-fluid'>
 
-    <h1 class="h4 mb-2 text-gray-800">Semua detail konfirmasi Pembayaran</h1>
-    <p class="mb-4">Menampilkan semua detail konfirmasi pembayaran pembeli dari dari toko baju MasCitra.com</p>
+    <h1 class="h4 mb-2 text-gray-800">Detail konfirmasi Pembayaran</h1>
+    <p class="mb-4">Menampilkan detail konfirmasi pembayaran pembeli dari dari toko baju MasCitra.com</p>
 
     <div class='card shadow mb-4'>
         <div class='card-header py-3'>
+            <a class='btn btn-info btn-sm' data-toggle="modal" data-target="#ongkirModal">Input ongkir</a>
             <a style="float: right;" class='btn btn-warning btn-sm' href=<?= base_url('admin/orders'); ?>>Kembali</a>
         </div>
 
@@ -45,7 +46,7 @@
                         Status: <i><?= $proses ?></i>
                         <form action="<?= base_url('admin/tracking') . $this->uri->segment(3) . $total['id_penjualan']; ?>" method="POST">
                             Input resi <input type="text" name="resi" class="form-control" value="<?= $total['resi'] ?>" style="display: inline-block; color:red; width:60%">
-                            <input type="submit" name="submit" value="submit" id="">
+                            <input  type="submit" name="submit" value="submit" id="">
                         </form>
                     </center> <br> <br>
                 </div>
@@ -134,5 +135,31 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="ongkirModal" tabindex="-1" role="dialog" aria-labelledby="ongkirModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ongkirModalLabel">Input Ongkir</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="<?= base_url('admin/tracking') . $this->uri->segment(3) . $total['id_penjualan']; ?>" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ongkir" name="ongkir" placeholder="Rp .....">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button name="submit1" type="submit" class="btn btn-primary" href="#">Tambah</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
