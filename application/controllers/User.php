@@ -20,7 +20,7 @@ class User extends CI_Controller
         if ($this->session->userdata('name') != null) {
             $data['dataalamat'] = $this->usermodel->getProvinsiId($data['alamat']['kota_id']);
         }
-        
+
         $data['jumlah'] = $this->usermodel->getTolkeranjang();
         $data['provinsi'] = $this->usermodel->getProvinsi();
         $harga = $this->usermodel->getTotalkeranjang();
@@ -80,7 +80,7 @@ class User extends CI_Controller
      public function delete_cart($id)
     {
         $this->load->model('usermodel');
-        $where = array('id' => $id); 
+        $where = array('id' => $id);
         $this->usermodel->deleteKeranjang($where,'keranjang');
         redirect('user/#cart');
     }
@@ -105,7 +105,7 @@ class User extends CI_Controller
         $this->load->model('usermodel');
         $id_provinsi = $this->input->post('id_provinsi');
         $kota = $this->usermodel->get_city($id_provinsi);
- 
+
         // Buat variabel untuk menampung tag-tag option nya
         // Set defaultnya dengan tag option Pilih
         $lists = "<option value=''>Kota Atau Kabupaten</option>";
@@ -209,7 +209,7 @@ class User extends CI_Controller
         }
     }
 
- 
+
     public function update_alamat(){
         $nama = $this->input->post('nama');
         $no = $this->input->post('no_tlp');
@@ -230,7 +230,7 @@ class User extends CI_Controller
 
         // Buat variabel untuk menampung tag-tag option nya
         // Set defaultnya dengan tag option Pilih
-        
+
  //
     }
 

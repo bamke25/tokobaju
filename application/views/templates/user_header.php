@@ -70,7 +70,7 @@
                 </div>
                 <div class="actionbutton">
                     <input id="ganti" class="button" type="submit" value="Update">
-                    <a class="button" href="#tujuan">next</a>
+                    <input id="ganti" class="button" type="submit" value="Next">
                 </div>
             </div>
         </form>
@@ -242,7 +242,7 @@
         </form>
         </div>
 
-
+<?php if($this->session->userdata('name') != null) { ?>
 <div id="tujuan">
         <div class="navinfo" id="navinfo">
 
@@ -253,15 +253,30 @@
                 <a href="#"></a>
             </div>
         </div>
-        <form action="<?=base_url('user/insert_history')?>" method="post" class="contentinfo">
+        <form action="<?=base_url('user/update_alamat')?>" method="post" class="contentinfo">
             <div class="boxform">
+              <?php if ($this->session->flashdata('notifal') != null ):?>
+                    <div class="form notif">
+                        <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
+                            BERHASIL
+                        </div>
+                    </div>
+                    <script>setTimeout(function(){ $('.notif').hide('slideup') }, 2000);</script>
+                    <?php
+                    $this->session->unset_userdata('notifal');
+                    endif
+                    ?>
                     <div class="form">
                         <label for="name">nama</label>
                         <input type="text"  value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
                     </div>
                     <div class="form">
                         <label for="tlp">No telepon</label>
-                        <input type="text" id="no_tlp" name="no_tlp" placeholder="masukan no telepon">
+                        <input type="text" id="no_tlp" value="<?php if($alamat['no_hp'] == null){echo "";}else{echo $alamat['no_hp'];}?>" name="no_tlp" placeholder="masukan no telepon">
+                    </div>
+                    <div class="form">
+                      <label for="lahir">Tempat Lahir</label>
+                        <input type="text"  id="lahir" name="lahir" value="<?php if($alamat['tempat_lahir'] == null){echo "";}else{echo $alamat['tempat_lahir'];}?>" placeholder="masukan tempat lahir">
                     </div>
                     <div class="form">
                         <label for="provinsi">provinsi</label> <br>
@@ -269,7 +284,19 @@
                             <option value="">Silahkan dipilih</option>
                             <?php
                                 foreach ($provinsi as $val) {
-                                    echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                    if ($alamat['kota_id'] == null) {
+                                       echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                    } else {
+                                        if ($dataalamat['nama_provinsi'] == $val['nama_provinsi']) {
+                                           echo "<option selected value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                        } else {
+                                            echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
+                                        }
+
+
+                                    }
+
+
                                 }
                              ?>
                         </select>
@@ -277,29 +304,28 @@
                     <div class="form">
                         <label for="kota">Kota</label><br>
                         <select name="kota" id="kota">
-                            <option value="">Kota Atau Kabupaten</option>
+                                    <?php if ($alamat['kota_id'] == null) {
+                                echo "<option value=''>Kota Atau Kabupaten</option>";
+                            }else{
+                                echo "<option  value='".$dataalamat['kota_id']."'>".$dataalamat['nama_kota']."</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="form">
                         <label for="alamat">alamat</label>
-                        <textarea name="alamat" id="alamat" cols="38" rows="5"></textarea>
+                        <textarea name="alamat" id="alamat" cols="38" rows="5"><?php if($alamat['alamat_lengkap'] == null){echo "";}else{echo $alamat['alamat_lengkap'];}?></textarea>
                     </div>
-                    <div class="form notif">
-                        <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
-                            BERHASIL
-                        </div>
-                    </div>
+
                     <div class="form">
                         <button id="save" type="submit">save</button>
-                        <button id="edit" type="submit">edit</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
 
             </div>
         </form>
 </div>
-
-
+<?php } ?>
 <div id="checkout">
         <div class="navinfo" id="navinfo">
             <div class="info">
