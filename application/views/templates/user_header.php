@@ -44,7 +44,7 @@
                         <input type="hidden" name="id[]" value="<?=$id_cart?>">
                         <input type="hidden" name="harga[]" value="<?=$value['harga']?>">
 
-                        <td><img src="<?= base_url($value['gambar'])?>" alt="#"> <a href="<?= base_url('user/delete_cart/'.$id_cart)?>">remove</a>
+                        <td><img src="<?= base_url("assets/img/produk/".$value['gambar'])?>" alt="#"> <a href="<?= base_url('user/delete_cart/'.$id_cart)?>">remove</a>
                         </td>
                         <td id="harga">Rp <?= number_format($value['harga'],2,',','.');?></td>
                         <td><input id="qty<?=$id?>" name="qty[]" type="number" value="<?= $value['quantity'] ?>"/></td>
@@ -245,7 +245,7 @@
 
 <div id="tujuan">
         <div class="navinfo" id="navinfo">
-            
+
             <div class="info">
                 alamat tujuan
             </div>
@@ -267,7 +267,7 @@
                         <label for="provinsi">provinsi</label> <br>
                         <select name="provinsi" id="provinsi">
                             <option value="">Silahkan dipilih</option>
-                            <?php 
+                            <?php
                                 foreach ($provinsi as $val) {
                                     echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
                                 }
@@ -286,7 +286,7 @@
                     </div>
                     <div class="form notif">
                         <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
-                            BERHASIL 
+                            BERHASIL
                         </div>
                     </div>
                     <div class="form">
@@ -294,7 +294,7 @@
                         <button id="edit" type="submit">edit</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
-                    
+
             </div>
         </form>
 </div>
@@ -343,7 +343,7 @@
                     <input style="display: none;" class="button" type="file" name="file" id="file" class="inputfile" />
                     <label style="padding: 0 10px 0 10px;" class="button" for="file">upload bukti transfer</label>
                     <button>save</button>
-                </div>              
+                </div>
             </div>
         </form>
         </div>
