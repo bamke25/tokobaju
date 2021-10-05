@@ -91,7 +91,8 @@ class Usermodel extends CI_Model{
 
     //update properties of a registered user
     public function s_usr_updt($kota, $alamat, $tlp, $name){
-    	$this->db->query("UPDATE user set alamat_lengkap ='".$alamat."', no_hp='".$tlp."', kota_id='".$kota."' where name like ".$name."");
+        // to update row properties of a user
+    	$this->db->query("UPDATE user set alamat_lengkap ='".$alamat."', no_hp='".$tlp."', kota_id='".$kota."' where name LIKE '".$name."'");
     }
 
 }
