@@ -14,7 +14,7 @@
                 </div>
                 <div class="form">
                     <label for="provinsi">provinsi</label><br><br>
-                    <select class= "select" id="provinsi" name="provinsi">
+                    <select class= "select" id="provinsi" name="provinsi" required>
                         <?php 
                         // i do not know how to print out the MariaDB data from model
                         // so i fetch data natively on php not by codeigniter
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form">
                     <label for="kota">Kota</label> <br><br>
-                   <select id="kota" name="kota" class="select">
+                   <select id="kota" name="kota" class="select" required>
                     <?php 
                         $i = 1;
                         foreach ($kota as $kota) {?>
