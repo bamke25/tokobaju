@@ -21,7 +21,7 @@
                             $mysqli = new mysqli("localhost", "root", "", "toko_baju");
                             if ($result = $mysqli->query("select * from provinsi")){
                                 while ($prov = $result->fetch_assoc()){?>
-                        <option value="<?php echo $prov['nama_provinsi'];?>">
+                        <option value="<?php echo $prov['provinsi_id'];?>">
                             <?php echo $prov['nama_provinsi']; }?>
                         </option>
                     <?php }?>

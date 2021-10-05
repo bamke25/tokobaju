@@ -28,7 +28,9 @@
             </a></li>
             
             <?php }?>
-            <li><a href="<?php echo base_url('user/account');?>"><img src="<?= base_url('assets/img/user.png') ?>" alt=""></a></li>
+            <li><a href="<?php echo base_url('user/account');?>"><img src="<?= base_url('assets/img/user.png') ?>" alt="">
+                <span>MY ACCOUNT</span>
+            </a></li>
 
             <?php if ($jumlah > 0) { ?>
             <li><a href="#cart"><img style="color: red" src="<?= base_url('assets/img/store.png') ?>" alt=""><span style="color: red"><?=$jumlah;?></span></a></li>

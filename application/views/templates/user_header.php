@@ -44,7 +44,7 @@
                         <input type="hidden" name="id[]" value="<?=$id_cart?>">
                         <input type="hidden" name="harga[]" value="<?=$value['harga']?>">
 
-                        <td><img src="<?= base_url("assets/img/produk/".$value['gambar'])?>" alt="#"> <a href="<?= base_url('user/delete_cart/'.$id_cart)?>">remove</a>
+                        <td><img src="<?= base_url($value['gambar'])?>" alt="#"> <a href="<?= base_url('user/delete_cart/'.$id_cart)?>">remove</a>
                         </td>
                         <td id="harga">Rp <?= number_format($value['harga'],2,',','.');?></td>
                         <td><input id="qty<?=$id?>" name="qty[]" type="number" value="<?= $value['quantity'] ?>"/></td>
@@ -126,7 +126,7 @@
                     <input type="text" name="name" id="name" placeholder="enter your name" required>
                 </div>
                 <div class="form">
-                    <label for="regusername">Username</label>
+                    <label for="regusername">EMAIL</label>
                     <input type="text" name="regemail" id="regusername" placeholder="example@gmail.com" required>
                 </div>
                 <div class="form">
@@ -245,7 +245,7 @@
 <?php if($this->session->userdata('name') != null) { ?>
 <div id="tujuan">
         <div class="navinfo" id="navinfo">
-
+            
             <div class="info">
                 alamat tujuan
             </div>
@@ -268,7 +268,7 @@
                     ?>
                     <div class="form">
                         <label for="name">nama</label>
-                        <input type="text"  value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda">
+                        <input type="text"  value="<?= $name;?>" name="nama" id="name" placeholder="masukan nama anda" readonly>
                     </div>
                     <div class="form">
                         <label for="tlp">No telepon</label>
@@ -282,7 +282,7 @@
                         <label for="provinsi">provinsi</label> <br>
                         <select name="provinsi" id="provinsi">
                             <option value="">Silahkan dipilih</option>
-                            <?php
+                            <?php 
                                 foreach ($provinsi as $val) {
                                     if ($alamat['kota_id'] == null) {
                                        echo "<option value='".$val['provinsi_id'].".".$val['nama_provinsi']."'>".$val['nama_provinsi']."</option>";
@@ -314,14 +314,23 @@
                     </div>
                     <div class="form">
                         <label for="alamat">alamat</label>
+<<<<<<< Updated upstream
                         <textarea name="alamat" id="alamat" cols="38" rows="5"><?php if($alamat['alamat_lengkap'] == null){echo "";}else{echo $alamat['alamat_lengkap'];}?></textarea>
+=======
+                        <textarea name="alamat" id="alamat" cols="38" rows="5"></textarea>
+                    </div>
+                    <div class="form notif">
+                        <div class="notif" style="background: #9b59b6;text-align: center;padding: 10px 15px;font-weight: bolder;color: white">
+                            BERHASIL 
+                        </div>
+>>>>>>> Stashed changes
                     </div>
 
                     <div class="form">
                         <button id="save" type="submit">save</button>
                         <a class="button" href="#history">kirim</a>
                     </div>
-
+                    
             </div>
         </form>
 </div>
@@ -369,7 +378,7 @@
                     <input style="display: none;" class="button" type="file" name="file" id="file" class="inputfile" />
                     <label style="padding: 0 10px 0 10px;" class="button" for="file">upload bukti transfer</label>
                     <button>save</button>
-                </div>
+                </div>              
             </div>
         </form>
         </div>

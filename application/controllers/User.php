@@ -163,6 +163,10 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function history(){
+
+    }
+
     public function edit_profile()
     {
         $data['title'] = 'Edit Profile';
