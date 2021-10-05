@@ -145,6 +145,7 @@ class User extends CI_Controller
         $tlp = $this->input->post('tlp');
 
         $this->usermodel->s_usr_updt($kota, $alamat, $tlp, $name);
+        echo '<script>alert("You have updated the biodata.")</script>';
         redirect('user/account/');
     }
 
