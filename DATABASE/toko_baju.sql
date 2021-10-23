@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `detail_pembelian`
 --
+create Database toko_baju;
+use toko_baju;
 
 CREATE TABLE `detail_pembelian` (
   `id_pembelian_detail` int(11) NOT NULL,
